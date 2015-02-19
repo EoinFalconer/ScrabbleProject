@@ -53,6 +53,15 @@ public class Board {
             } 
             }
     }
+	
+	    public void resestBoard(){
+    	for (int i = 0 ; i<15 ; i++){
+    		for (int j = 0 ; j<15 ; j++){
+    			boardArray[i][j].tileInSquareValue = ' ' ; 
+    			boardArray[i][j].tileInSquareScore = 0 ; 
+    		}
+    	}
+    }
     
     public void populateBoard() throws NullPointerException {
     	 BufferedReader b1 = null;

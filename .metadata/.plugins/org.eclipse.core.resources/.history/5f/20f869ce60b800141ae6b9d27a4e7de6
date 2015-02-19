@@ -112,8 +112,7 @@ public class FrameTest {
 				System.out.println("\nFrame Player One:" + f.displayFrame() );	// displays changed frame
 				
 				//b.checkWordLegality(s);
-				b.resestBoard();
-				b.displayBoard();
+				
 				  
 					} 
 				
