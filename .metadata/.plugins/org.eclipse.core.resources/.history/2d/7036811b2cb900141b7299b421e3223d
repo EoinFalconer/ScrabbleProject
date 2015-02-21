@@ -1,0 +1,49 @@
+import javax.swing.JOptionPane;
+
+
+		public class BoardTest {
+
+			public static void main(String args[]) throws NullPointerException, RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException {
+				
+				
+				
+				Pool newPool = new Pool() ;   				//creates a pool object
+				newPool.populateNewPool();	// creates a new pool
+				Board b = new Board();
+				b.populateBoard();
+				String nameOne = "Tim";		  				// player name
+				Player p = new Player(nameOne);  				// Creates a player called eoin
+						
+				Frame f = new Frame(p);					// creates a new frame for player p
+				f.refillFrame(newPool);							// fills frame from pool
+				
+				
+				System.out.println("Expected Pool Size: 93, Actual:" + newPool.size() + "\n");			// prints size of pool							// resets the frame
+				
+					
+						// Prints  Both players Frame 
+						String s = f.displayFrame();
+			
+						 
+								
+							
+					char ch = s.charAt(1);			// takes in a letter from the user to be replaced in the frame
+							f.moveTileToPool(ch, newPool);		// puts choosen letter back into the pool
+								f.refillFrame(newPool);					// replaces empty spaces in the frame with new tiles from pool
+							System.out.println("Frame Player One:" + f.displayFrame() );	// displays changed frame		
+							
+							
+							
+					String word  = JOptionPane.showInputDialog("Enter Word:", null);
+					String startingCoordinate = "B3";
+					String axis  = "vertical";
+
+						b.insertOnBoard(word, startingCoordinate, axis, f);
+						b.displayBoard();
+						
+						
+						
+			}
+	}
+
+

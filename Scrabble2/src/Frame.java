@@ -1,6 +1,6 @@
 /*
  *  B’sWhyteFalcon
- *	Assignment  1
+ *	Assignment  1
  *	Ben Reynolds – 13309656
  *	Conor Whyte -   13324911
  *	Eoin Falconer -   13331016
@@ -113,10 +113,10 @@ public class Frame implements FrameInterface {
  */
 	
 	
-	public String displayFrame(){ 
+	public String displayFrame() throws NullPointerException{ 
 			
-			String frameString = "";
-				frameString = "[" + String.valueOf(arrayOfTiles[0].tname);
+			String frameString = "[";
+				frameString = frameString + String.valueOf(arrayOfTiles[0].tname);
 					
 					for(int i=1;i<7;i++){
 						frameString = frameString + "," + arrayOfTiles[i].tname;

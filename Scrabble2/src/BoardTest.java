@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 				newPool.populateNewPool();	// creates a new pool
 				Board b = new Board();
 				b.populateBoard();
+				boolean isEmptyTest = b.isSquareEmpty(7, 7);
+				System.out.println("Testing isEmpty():\n" + "Expected Value = false"+"\n"+"Result =" + isEmptyTest+ "\n\n");
 				String nameOne = "Tim";		  				// player name
 				Player p = new Player(nameOne);  				// Creates a player called eoin
 						
@@ -18,30 +20,34 @@ import javax.swing.JOptionPane;
 				f.refillFrame(newPool);							// fills frame from pool
 				
 				
-				System.out.println("Expected Pool Size: 93, Actual:" + newPool.size() + "\n");			// prints size of pool							// resets the frame
+				System.out.println("Testing Pool:\n"+"Expected Pool Size: 93, Actual:" + newPool.size() + "\n\n");			// prints size of pool							// resets the frame
 				
 					
-						// Prints  Both players Frame 
-						String s = f.displayFrame();
+				
+				String s = f.displayFrame();
 			
-						 
-								
-							
-					char ch = s.charAt(1);			// takes in a letter from the user to be replaced in the frame
+						 char ch = s.charAt(3);
 							f.moveTileToPool(ch, newPool);		// puts choosen letter back into the pool
 								f.refillFrame(newPool);					// replaces empty spaces in the frame with new tiles from pool
-							System.out.println("Frame Player One:" + f.displayFrame() );	// displays changed frame		
+							System.out.println("Testing Frame:\nFrame Player One:" + f.displayFrame() + "\n\n" );	// displays changed frame		
 							
 							
 							
-					String word  = JOptionPane.showInputDialog("Enter Word:", null);
-					String startingCoordinate = "B3";
-					String axis  = "vertical";
+					String word  = Character.toString(s.charAt(1)) + Character.toString(s.charAt(5));
+					String startingCoordinate = "H8";
+					String axis  = "horizontal";
 
 						b.insertOnBoard(word, startingCoordinate, axis, f);
-						b.displayBoard();
-						
+						if(!(b.firstWordInCentre(word, startingCoordinate, axis))){
+							b.resestBoard();
+							System.out.println("Testing firstWordInCentre():\nError, nothing in H8");
+						}
+						else{
+							System.out.println("Testing insertOnBoard():\n");
+							b.displayBoard();
+						}
 						
 						
 			}
 	}
+

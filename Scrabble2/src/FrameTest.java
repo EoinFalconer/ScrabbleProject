@@ -82,7 +82,7 @@ public class FrameTest {
 			String axis  = JOptionPane.showInputDialog("Which axis would you like to use? horizontal or vertical", null);
 
 				b.insertOnBoard(word, startingCoordinate, axis, f);
-				if(b.firstWordInCentre()) {
+				if(b.firstWordInCentre(axis, axis, axis)) {
 					b.displayBoard();
 				}
 				
