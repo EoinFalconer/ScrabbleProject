@@ -469,13 +469,32 @@ public class Board {
     	
     }
    
-    public boolean firstWordInCentre(){
-    	if(!boardArray[7][7].returnSquareName().equals(null)){
-    		return true;
-    	}
-    	else{
-    		return false;
-    	}
+    public boolean firstWordInCentre(String chooseWord, String startingCoordinate, String axis){
+    	boolean flag = false;
+    	
+    	String upperStartingCoordinate = startingCoordinate.toUpperCase(); 
+        char[] boardCoordinates  =  upperStartingCoordinate.toCharArray();
+        convertToIJCoordinates(boardCoordinates);
+        
+        for (int i=0; i < chooseWord.length(); i++) { // while elements in the array 
+	        	if(axis.equalsIgnoreCase("horizontal")) {
+	        			if((rowCoordinate == 7) && (columnCoordinate == 7)) { 
+	        					flag = true;
+	        					break;
+	        				}
+	        			columnCoordinate++;
+	        	}
+	        	
+	        	else if(axis.equalsIgnoreCase("horizontal")) {
+        			if((rowCoordinate == 7) && (columnCoordinate == 7)) { 
+        					flag = true;
+        					break;
+        				}
+        			rowCoordinate++;
+        	}
+        }
+        
+        return flag;
     }
    
     public Square insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
