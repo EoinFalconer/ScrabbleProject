@@ -31,8 +31,7 @@ public class FrameTest {
 		fr.refillFrame(newPool);							// fills frame from pool
 		
 		
-		System.out.println("Expected Pool Size: 86, Actual:" + newPool.size() + "\n");			// prints size of pool
-		f.resetFrame(newPool);							// resets the frame
+		System.out.println("Expected Pool Size: 86, Actual:" + newPool.size() + "\n");			// prints size of pool							// resets the frame
 		System.out.println("Expected Pool Size: 93, Actual:" + newPool.size() + "\n");			// prints size of pool
 		f.refillFrame(newPool);							// refills frame
 		
@@ -55,34 +54,14 @@ public class FrameTest {
 					f.moveTileToPool(ch, newPool);		// puts choosen letter back into the pool
 						f.refillFrame(newPool);					// replaces empty sppaces in the frame with new tiles from pool
 					System.out.println("Frame Player One:" + f.displayFrame() );	// displays changed frame
-						
 		
-			
-			 
-				
-	/*		c = JOptionPane.showInputDialog("Player two, Which letter do you wish to discard?", null);
-					ch = c.charAt(0);				// takes in a letter from the user to be replaced in the frame
-					fr.moveTileToPool(ch, newPool);		// puts choosen letter back into the pool
-						fr.refillFrame(newPool);					// replaces empty sppaces in the frame with new tiles from pool
-					System.out.println("Frame Player two:" + fr.displayFrame());	// displays changed frame
-				
-					System.out.println("\nFrame player one size:" + f.frameSize());
-					System.out.println("Frame player two size:" + fr.frameSize());
-					
-					System.out.println("Is Frame empty:" + fr.isFrameEmpty());
-					
-	*/				
-					
-					
-					
-					
 					
 			String word  = JOptionPane.showInputDialog("Which Word do you wish to place on the board", null);
 			String startingCoordinate = JOptionPane.showInputDialog("Which Co-ordinate do you wish to start at?", null);
 			String axis  = JOptionPane.showInputDialog("Which axis would you like to use? horizontal or vertical", null);
 
 				b.insertOnBoard(word, startingCoordinate, axis, f);
-				if(b.firstWordInCentre()) {
+				if(b.firstWordInCentre(word,startingCoordinate,axis)) {
 					b.displayBoard();
 				}
 				
@@ -102,6 +81,7 @@ public class FrameTest {
 				if(b.checkWordIsLegal(word, startingCoordinate, axis)) {
 					b.insertOnBoard(word, startingCoordinate, axis, f);
 					b.displayBoard();
+					
 				}
 				
 				else  {
@@ -118,7 +98,3 @@ public class FrameTest {
 					} 
 				
 	}
-
-
-
-

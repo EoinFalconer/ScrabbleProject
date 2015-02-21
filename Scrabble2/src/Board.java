@@ -2,7 +2,7 @@
 /**
  * /*
  *  B’sWhyteFalcon
- *	Assignment  1
+ *	Assignment  2
  *	Ben Reynolds – 13309656
  *	Conor Whyte -   13324911
  *	Eoin Falconer -   13331016
@@ -15,17 +15,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
+
 
 public class Board {
 	
 	private final int HORIZONTAL_INDEX=15;
     private final int VERTICAL_INDEX=15;
     private Square boardArray[][];
-    private Scanner in;
-    
-    int rowCoordinate =0;
-    int columnCoordinate=0;
     
     private String[] arrayOfLines = new String[200];
     private String[] A = new String[500];
@@ -469,55 +465,91 @@ public class Board {
     	
     }
    
-    public boolean firstWordInCentre(){
-    	if(!boardArray[7][7].returnSquareName().equals(null)){
-    		return true;
+    public boolean firstWordInCentre(String chooseWord, String startingCoordinate, String axis){
+    	boolean flag = false;
+    	int rowCoordinate=0;
+    	int columnCoordinate=0;
+    	/*String upperStartingCoordinate = startingCoordinate.toUpperCase(); 
+        char[] boardCoordinates  =  upperStartingCoordinate.toCharArray();
+        convertToIJCoordinates(boardCoordinates);*/
+        
+    	for(int i=0;i<15;i++){
+    		for(int j=0;j<15;j++){
+    			if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
+    				rowCoordinate = i;
+    				columnCoordinate = j;
+    				break;
+    			}
+    		}
     	}
-    	else{
-    		return false;
-    	}
+    	
+        for (int i=0; i < chooseWord.length(); i++) { // while elements in the array 
+	        	if(axis.equalsIgnoreCase("horizontal")) {
+	        			if((rowCoordinate == 7) && (columnCoordinate == 7)) { 
+	        					flag = true;
+	        					break;
+	        				}
+	        			columnCoordinate++;
+	        	}
+	        	
+	        	else if(axis.equalsIgnoreCase("horizontal")) {
+        			if((rowCoordinate == 7) && (columnCoordinate == 7)) { 
+        					flag = true;
+        					break;
+        				}
+        			rowCoordinate++;
+        	}
+        }
+        
+        return flag;
     }
-   
     public Square insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
-    	        
+    	        int rCoordinate=0, cCoordinate=0;
     		  /* 1. Take in word and split it to characters. Check if there in frame
     		   * 2. take in starting coordinate and convert to i j.
     		   * 3. take in axis and place each character in each coordinate. 
     		   */
     	      
-    	        chooseWord = chooseWord.toUpperCase(); // 1
+    	       /* chooseWord = chooseWord.toUpperCase(); // 1
     	        String upperStartingCoordinate = startingCoordinate.toUpperCase(); // 2
     	        
     	        char[] boardCoordinates  =  upperStartingCoordinate.toCharArray();
     	        
-    	        convertToIJCoordinates(boardCoordinates);
-    	        
-    	       
+    	        convertToIJCoordinates(boardCoordinates);*/
+    	        for(int i=0;i<15;i++){
+    	        	for(int j=0;j<15;j++){
+    	        		if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
+    	        			rCoordinate = i;
+    	        			cCoordinate = j;
+    	        			break;
+    	        		}
+    	        	}
+    	        }
     	      
-    	        System.out.println(boardArray[rowCoordinate][columnCoordinate].squareName);
+    	        System.out.println(boardArray[rCoordinate][cCoordinate].squareName);
     	        i = 0;
     	        char letterToBeInserted;
     	        for (int i=0; i < chooseWord.length(); i++) { // while elements in the array 
     	        	
     	        	letterToBeInserted = chooseWord.charAt(i);
-    	        	System.out.println("chooseword: "+ chooseWord + " " + letterToBeInserted);
+    	        	System.out.println("Checking:" + letterToBeInserted);
 	    	        	if(f.isTileInFrame(letterToBeInserted)) {  
 	    	        		
 	    	        		if(axis.equalsIgnoreCase("horizontal")) {		
-	    	        			if(isSquareEmpty(rowCoordinate, columnCoordinate)){
+	    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){
 		    	        			
-		    	        			boardArray[rowCoordinate][columnCoordinate].tileInSquareValue = letterToBeInserted;
+		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
 		    	        	
-		    	        			boardArray[rowCoordinate][columnCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
-		    	        			System.out.println(boardArray[rowCoordinate][columnCoordinate].tileInSquareScore);
-		    	        			columnCoordinate++;
+		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
+		    	        			System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
+		    	        			cCoordinate++;
 		    	        				f.removeFromFrame(letterToBeInserted);
 		    	        		}
 		    	        		
-		    	        		else if(!isSquareEmpty(rowCoordinate, columnCoordinate)) {
+		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {
 		    	        			
-		    	        			if(letterToBeInserted == boardArray[rowCoordinate][columnCoordinate].tileInSquareValue) {
-		    	        				columnCoordinate++;
+		    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
+		    	        				cCoordinate++;
 		    	        			}
 		    	        			
 		    	        			else {
@@ -532,20 +564,20 @@ public class Board {
 	    	        		
 	    	        		else if(axis.equalsIgnoreCase("vertical")) {
 	    	        			
-	    	        			if(isSquareEmpty(rowCoordinate, columnCoordinate)){
+	    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){
 		    	        			
-		    	        			boardArray[rowCoordinate][columnCoordinate].tileInSquareValue = letterToBeInserted;
-		    	        			boardArray[rowCoordinate][columnCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
-		    	        			System.out.println(boardArray[rowCoordinate][columnCoordinate].tileInSquareScore);
+		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
+		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
+		    	        			System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
 
-		    	        			rowCoordinate++;
+		    	        			rCoordinate++;
 		    	        			f.removeFromFrame(letterToBeInserted);
 		    	        		}
 		    	        		
-		    	        		else if(!isSquareEmpty(rowCoordinate, columnCoordinate)) {
+		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {
 		    	        			
-		    	        			if(letterToBeInserted == boardArray[rowCoordinate][columnCoordinate].tileInSquareValue) {
-		    	        				rowCoordinate++;
+		    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
+		    	        				rCoordinate++;
 		    	        			}
 		    	        			
 		    	        			else {
@@ -560,9 +592,9 @@ public class Board {
 	    	        	
 	    	        	else { 
 		    	        		if(axis.equalsIgnoreCase("horizontal")) {
-			    	        		if(isSquareEmpty(rowCoordinate, columnCoordinate)) {
-			    	        			if(letterToBeInserted == boardArray[rowCoordinate][columnCoordinate].tileInSquareValue) {
-			    	        				columnCoordinate++;
+			    	        		if(isSquareEmpty(rCoordinate, cCoordinate)) {
+			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
+			    	        				cCoordinate++;
 			    	        			}
 			    	        			
 			    	        			else {
@@ -576,9 +608,9 @@ public class Board {
 		    	        		}
 		    	        		
 		    	        		else if(axis.equalsIgnoreCase("vertical")) {
-		    	        			if(isSquareEmpty(rowCoordinate, columnCoordinate)) {
-			    	        			if(letterToBeInserted == boardArray[rowCoordinate][columnCoordinate].tileInSquareValue) {
-			    	        				rowCoordinate++;
+		    	        			if(isSquareEmpty(rCoordinate, cCoordinate)) {
+			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
+			    	        				rCoordinate++;
 			    	        			}
 			    	        			
 			    	        			else {
@@ -598,30 +630,23 @@ public class Board {
     	        }
     	        return null;
     	  }
-    
-   /* public void removeFromFrame (char c, Frame f) throws RankOutOfBoundsException, VectorFullException {  // deletes a tile from frame after being placed on board
-		
-    	Tile e = null;
-    	char cUpper = Character.toUpperCase(c);
-    																	//PROBLEM THIS METHOD IS BROKEN
-	    	
-	    		for(i=0; i<7;i++) {
-	    			if(cUpper == f.arrayOfTiles[i].tname) {
-			    		f.arrayOfTiles[i] = e;
-			    		f.numberOfElements--;
-	    			}
-	    		}
-	    	
-	    	
-	   
-    } */
     	               	               
     public boolean checkWordIsLegal(String chooseWord,String startingCoordinate, String axis) throws ArrayIndexOutOfBoundsException{
     		boolean flag = false;
-    		
-    		String upperStartingCoordinate = startingCoordinate.toUpperCase(); 
+    		int rowCoordinate=0,columnCoordinate=0;
+    		/*String upperStartingCoordinate = startingCoordinate.toUpperCase(); 
  	        char[] boardCoordinates  =  upperStartingCoordinate.toCharArray();
- 	        convertToIJCoordinates(boardCoordinates);
+ 	        convertToIJCoordinates(boardCoordinates);*/
+    		for(int i=0;i<15;i++){
+    			for(int j=0;j<15;j++){
+    				if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
+    					rowCoordinate = i;
+    					columnCoordinate = j;
+    					break;
+    					
+    				}
+    			}
+    		}
  	        
  	        if(axis.equalsIgnoreCase("horizontal")) {
  	        	for(int i=0; i < chooseWord.length(); i++ ) {
@@ -681,85 +706,6 @@ public class Board {
     		
     		return flag;
     	  }
-    
-    
-    public void convertToIJCoordinates(char[] boardCoordinates) {
-    	 if(boardCoordinates[0] == 'A') { 
-	        	rowCoordinate = 0;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'B') { 
-	        	rowCoordinate = 1;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'C') { 
-	        	rowCoordinate = 2;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'D') { 
-	        	rowCoordinate = 3;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'E') { 
-	        	rowCoordinate = 4;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'F') { 
-	        	rowCoordinate = 5;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'G') { 
-	        	rowCoordinate = 6;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'H') { 
-	        	rowCoordinate = 7;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'I') { 
-	        	rowCoordinate = 8;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'J') { 
-	        	rowCoordinate = 9;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'K') { 
-	        	rowCoordinate = 10;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'L') { 
-	        	rowCoordinate =11;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'M') { 
-	        	rowCoordinate = 12;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == 'N') { 
-	        	rowCoordinate = 13;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-	        if(boardCoordinates[0] == '0') { 
-	        	rowCoordinate = 14;
-	        	columnCoordinate = Character.getNumericValue(boardCoordinates[1]);
-	        	columnCoordinate--;
-	        }
-    }
     
     public boolean isSquareEmpty( int i, int j){			
 	
