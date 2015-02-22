@@ -59,6 +59,10 @@ public class Pool implements PoolInterface{
 							{
 								throw new RankOutOfBoundsException(); 
 							}
+							int i=rank;
+							while(i<sizeOfPool){
+								Vector[i] = Vector[i+1];
+							}
 						
 					e = Vector[rank]; //assigns element to position
 						
@@ -87,7 +91,7 @@ public class Pool implements PoolInterface{
 	
 			public Tile removeTileAtRankFromPool(int rank) throws RankOutOfBoundsException, ArrayIndexOutOfBoundsException {
 						
-						Tile e;
+						Tile e=null;
 						
 							if((rank<0)||(rank>sizeOfPool-1))
 							{
@@ -96,13 +100,14 @@ public class Pool implements PoolInterface{
 							else
 							{
 								e = Vector[rank];
+								Vector[rank] =null;
 									int i = rank;
 										while(i<sizeOfPool)
 										{
 											Vector[i] = Vector[i+1]; //shifting elements
 												i++;
 										}
-									sizeOfPool = sizeOfPool-1;
+									sizeOfPool = sizeOfPool-1;	
 								return e;
 							}
 					}

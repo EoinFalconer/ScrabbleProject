@@ -25,7 +25,8 @@ public class Board {
     
     private String[] arrayOfLines = new String[200];
     private String[] A = new String[500];
-    private String[] B = new String[500];
+    @SuppressWarnings("unused")
+	private String[] B = new String[500];
     private String[] C = new String[500];
     private String[] D = new String[500];
     private String[] E = new String[500];
@@ -235,20 +236,42 @@ public class Board {
 			
     }
     
-    public boolean isPlacedInBoard(String s){
-    	boolean flag = false;
+    public boolean isPlacedInBoard(String word, String startingCoordinate, String axis){
+    	int startingrowCoordinate=-1;
+    	int startingcolumnCoordinate= -1;
+    	@SuppressWarnings("unused")
+		boolean flag1=false,flag2=true;
     	for(int i=0;i<15;i++){
     		for(int j=0;j<15;j++){
-    			if(boardArray[i][j].returnSquareName() == s){
-    				flag = true;
-    				break;
-    			}
-    			else{
-    				flag = false;
+    			if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
+    					startingrowCoordinate = i;
+    					startingcolumnCoordinate =j;
     			}
     		}
     	}
-    	if(flag = true){
+    	if((startingrowCoordinate == -1) || (startingcolumnCoordinate == -1)){
+			flag1 =false;
+			return false;
+		}
+    	else{
+    		flag1 = true;
+    	
+    	
+			if(axis.equalsIgnoreCase("vertical")){
+				if(startingrowCoordinate + (word.length()-1) >=15){
+					flag2 = false;
+				}
+			}
+			else if(axis.equalsIgnoreCase("horizontal")){
+				if(startingcolumnCoordinate + (word.length()-1) >= 15){
+					flag2 = false;
+				}
+			}
+			else{
+				flag1 =true;
+			}
+    	}
+    	if((flag1=true)||(flag2=true)){
     		return true;
     	}
     	else{

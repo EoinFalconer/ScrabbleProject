@@ -15,7 +15,8 @@
 public class Square implements SquareInterface {
     String squareScore = " "; // e.g. normal, double, triple
     String squareName = " "; //A1,A2,A3
-    private boolean flag;
+    @SuppressWarnings("unused")
+	private boolean flag;
     int tileInSquareScore = 0;
     char tileInSquareValue = ' ';
     int i,j;

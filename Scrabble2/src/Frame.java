@@ -12,7 +12,7 @@ public class Frame implements FrameInterface {
 	private int numberOfElements; 			//the amount of elements being used
 	private int numOfElementsInFrame = 7; 	//size of array
 	Tile arrayOfTiles[]; 					//the object
-	private String personName;
+	String personName;
 	
 	
 		public Frame(Player p){
