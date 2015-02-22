@@ -9,42 +9,42 @@
 public class Frame implements FrameInterface {
 	
 	
-	private int numberOfElements; 			//the amount of elements being used
-	private int numOfElementsInFrame = 7; 	//size of array
-	Tile arrayOfTiles[]; 					//the object
-	private String personName;
+	private int numberOfElements; 			
+	private int numOfElementsInFrame = 7; 	
+	Tile arrayOfTiles[]; 					
+	String personName;
 	
 	
 		public Frame(Player p){
 			
-			arrayOfTiles = new Tile[numOfElementsInFrame];  //making array object of size N
-			numberOfElements = 0;  					  //setting the used array objects to 0
+			arrayOfTiles = new Tile[numOfElementsInFrame];  
+			numberOfElements = 0;  					  
 			personName = p.playerid;
 			
 		}
 	 
 		public int frameSize() {
-			return numberOfElements; 				  //returns n, discussed above
+			return numberOfElements; 				 
 		}
 
 	 
 		public boolean isFrameEmpty() {
-			return numberOfElements == 0; 			  //returns n as 0
+			return numberOfElements == 0; 			  
 		}
 	
 			
-			public Tile getTileRank(int rank) throws RankOutOfBoundsException {
+		public Tile getTileRank(int rank) throws RankOutOfBoundsException {
 					
 					if((rank<0)||(rank>numberOfElements-1)){
 						
 						throw new RankOutOfBoundsException();    //throws exception if out of range
 					}
 						
-					return arrayOfTiles[rank]; 					 //returns the element at place of rank
-				}
+				return arrayOfTiles[rank]; 					 //returns the element at place of rank
+			}
 
 	
-	public Tile moveTileToPool(char c, Pool p)
+	    public Tile moveTileToPool(char c, Pool p)
 			throws RankOutOfBoundsException, VectorFullException {
 				
 			Tile e = null;
@@ -98,7 +98,7 @@ public class Frame implements FrameInterface {
 									throw new VectorFullException(); 
 								}
 									if(arrayOfTiles[i] != e){
-										numberOfElements = numberOfElements+1; //iterate
+										numberOfElements = numberOfElements+1; 
 									}
 						}
 				}
@@ -139,28 +139,30 @@ public class Frame implements FrameInterface {
 			
 		}
 		
-		public boolean isTileInFrame(char c) throws RankOutOfBoundsException, VectorFullException, NullPointerException, ArrayIndexOutOfBoundsException {
+		public boolean isTileInFrame(char c) 
+				throws RankOutOfBoundsException, 
+					VectorFullException, NullPointerException, ArrayIndexOutOfBoundsException {
 			
 		
 			  char cUpper = Character.toUpperCase(c);
 			  boolean flag = false;
 			  
-			  for(int i=0; i < 7; i++){
-					
-				  if(arrayOfTiles[i] == null)  {
-					// testing System.out.println("null");
-					  continue;
+				  for(int i=0; i < 7; i++){
+						
+					  if(arrayOfTiles[i] == null)  {
+						// testing System.out.println("null");
+						  continue;
+						 
+					  }
 					 
-				  }
-				 
-				  else if (cUpper == arrayOfTiles[i].getName()) {
-						flag = true;
-						// testing System.out.println(cUpper + " " + arrayOfTiles[i].getName());
+					  else if (cUpper == arrayOfTiles[i].getName()) {
+							flag = true;
+							// testing System.out.println(cUpper + " " + arrayOfTiles[i].getName());
+						}
+						
 					}
 					
-				}
-					
-					return flag;
+				return flag;
 			
 		}
 		
@@ -178,7 +180,6 @@ public class Frame implements FrameInterface {
 				 
 				  else if (cUpper == arrayOfTiles[i].getName()) {
 						score = arrayOfTiles[i].score;
-						// testing System.out.println(cUpper + " " + arrayOfTiles[i].getName());
 					}
 					
 				}
@@ -191,7 +192,7 @@ public class Frame implements FrameInterface {
 
 	    	Tile e = null;
 	    	char cUpper = Character.toUpperCase(c);
-	    																	//PROBLEM THIS METHOD IS BROKEN
+	    																	
 		    	
 		    		for(int i=0; i<7;i++) {
 		    			if(arrayOfTiles[i] == null)
