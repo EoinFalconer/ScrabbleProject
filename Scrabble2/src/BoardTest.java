@@ -70,6 +70,20 @@
 						}
 					System.out.println("Expected: Error, nothing in H8\n\n");
 					
+					f.refillFrame(newPool);
+					word2  = Character.toString(s.charAt(1)) + Character.toString(s.charAt(5));
+					startingCoordinate2 = "G8";
+					axis2  = "vertical";
+						if(!(b.firstWordInCentre(word2, startingCoordinate2, axis2))){
+							System.out.println("/nTesting firstWordInCentre():\nError, nothing in H8\n");
+							f.displayFrame();
+						}
+						else{
+							System.out.println("\nTesting insertOnBoard():\n");
+							b.insertOnBoard(word2, startingCoordinate2, axis2, f);
+							b.displayBoard();
+						}
+					
 					/*
 					 * Testing the isPlacedInBoard() method.
 					 */

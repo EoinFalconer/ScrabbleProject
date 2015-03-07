@@ -21,7 +21,6 @@ public class Board {
 	private final int HORIZONTAL_INDEX=15;
     private final int VERTICAL_INDEX=15;
     private Square boardArray[][];
-    
     private String[] arrayOfLines = new String[200];
     private String[] A = new String[500];
     @SuppressWarnings("unused")
@@ -94,140 +93,225 @@ public class Board {
 					
 					boardArray[0][i].getSquareName(A[i]);
 					
-						 if((i == 0) || (i == 7) || (i == 14)) {
-							 boardArray[0][i].getSquareScore("tword"); 
-						}
-						 
-							if((i == 3) || (i == 11)){
-								boardArray[0][i].getSquareScore("dletter");
-							}
+					switch (i) {
+						case 0: boardArray[0][i].getSquareScore("tw"); 
+							break;
+						case 3: boardArray[0][i].getSquareScore("dl");
+							break;
+						case 7: boardArray[0][i].getSquareScore("tw"); 
+							break;
+						case 11: boardArray[0][i].getSquareScore("dl");
+							break;
+					}
+					
 				}
 			   
 				String[] B = arrayOfLines[1].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[1][i].getSquareName(B[i]);
 					
-						if((i == 1) || (i == 13)){
-							boardArray[1][i].getSquareScore("dword");
+						switch (i) {
+							case 1: boardArray[1][i].getSquareScore("dw"); 
+								break;
+							case 5: boardArray[1][i].getSquareScore("tl");
+								break;
+							case 9: boardArray[1][i].getSquareScore("tl"); 
+								break;
+							case 13: boardArray[1][i].getSquareScore("dw");
+								break;
 						}
-							if((i == 5) || (i == 9)){
-								boardArray[1][i].getSquareScore("tletter");
-							}
 				}
 				
 				 C = arrayOfLines[2].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[2][i].getSquareName(C[i]);
-					if((i == 2) || (i == 12)){
-						boardArray[2][i].getSquareScore("dword");
-					}
-					if((i == 6) || (i == 8)){
-						boardArray[2][i].getSquareScore("dletter");
+	
+					switch (i) {
+						case 2: boardArray[2][i].getSquareScore("dw"); 
+							break;
+						case 6: boardArray[2][i].getSquareScore("dl");
+							break;
+						case 8: boardArray[2][i].getSquareScore("dl"); 
+							break;
+						case 12: boardArray[2][i].getSquareScore("dw");
+							break;
 					}
 				}
 				
 				D = arrayOfLines[3].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[3][i].getSquareName(D[i]);
-					if((i ==0) || (i == 7) || (i == 14)){
-						boardArray[3][i].getSquareScore("dletter");
-					}
-					if((i == 3) || (i == 11)){
-						boardArray[3][i].getSquareScore("dword");
+				
+					switch (i) {
+						case 0: boardArray[3][i].getSquareScore("dl"); 
+							break;
+						case 7: boardArray[3][i].getSquareScore("dl");
+							break;
+						case 14: boardArray[3][i].getSquareScore("dl"); 
+							break;
+						case 3: boardArray[3][i].getSquareScore("dw");
+							break;
+						case 11: boardArray[3][i].getSquareScore("dw");
+							break;
 					}
 				}
 				
 				E = arrayOfLines[4].split(" ");
 				for(i=0;i < 15;i++){
 					 boardArray[4][i].getSquareName(E[i]);
-					if((i == 4) || (i == 10)){
-						boardArray[4][i].getSquareScore("dword");
+					
+					 switch (i) {
+						case 4: boardArray[4][i].getSquareScore("dw"); 
+							break;
+						case 10: boardArray[4][i].getSquareScore("dw");
+							break;
 					}
+					
 				}
 				
 				F = arrayOfLines[5].split(" ");
 				for(i=0;i < 15;i++){
 					 boardArray[5][i].getSquareName(F[i]);
-					if((i == 1) || (i == 5) || (i == 9) || (i == 13)){
-						boardArray[5][i].getSquareScore("tletter");
+					
+					switch (i) {
+						case 1: boardArray[5][i].getSquareScore("tl"); 
+							break;
+						case 5: boardArray[5][i].getSquareScore("tl");
+							break;
+						case 9: boardArray[5][i].getSquareScore("tl"); 
+							break;
+						case 13: boardArray[5][i].getSquareScore("tl");
+							break;
 					}
 				}
+				
 				G = arrayOfLines[6].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[6][i].getSquareName(G[i]); //2 6 8 12
-					if((i == 2) || (i == 6) || (i == 8)|| (i == 12)){
-						boardArray[6][i].getSquareScore("dletter");
+					
+					switch (i) {
+						case 2: boardArray[6][i].getSquareScore("dl"); 
+							break;
+						case 6: boardArray[6][i].getSquareScore("dl"); 
+							break;
+						case 8: boardArray[6][i].getSquareScore("dl"); 
+							break;
+						case 12: boardArray[6][i].getSquareScore("dl"); 
+							break;
 					}
 				}
+				
 				 H = arrayOfLines[7].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[7][i].getSquareName(H[i]);
-					if((i == 0) || (i == 14)){
-						boardArray[7][i].getSquareScore("tword");
-					}
-					if((i == 3) || (i == 11)){
-						boardArray[7][i].getSquareScore("dletter");
+					switch(i) {
+						case 0: boardArray[7][i].getSquareScore("tw"); 
+							break;
+						case 14: boardArray[7][i].getSquareScore("tw"); 
+							break;
+						case 3: boardArray[7][i].getSquareScore("dl"); 
+							break;
+						case 11: boardArray[7][i].getSquareScore("dl"); 
+							break;
+						case 7: boardArray[7][i].getSquareScore("*"); 
+							break;
 					}
 				}
+					
 				 I = arrayOfLines[8].split(" ");
 				for( i=0;i < 15;i++){
 					boardArray[8][i].getSquareName(I[i]);
-					if((i == 2) || (i == 6) || (i == 8)|| (i == 12)){
-						boardArray[8][i].getSquareScore("dletter");
+					switch (i) {
+						case 2: boardArray[8][i].getSquareScore("dl"); 
+							break;
+						case 6: boardArray[8][i].getSquareScore("dl"); 
+							break;
+						case 8: boardArray[8][i].getSquareScore("dl"); 
+							break;
+						case 12: boardArray[8][i].getSquareScore("dl"); 
+							break;
 					}
 				}
 				 J = arrayOfLines[9].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[9][i].getSquareName(J[i]);
-					if((i == 1) || (i == 5) || (i == 9) || (i == 13)){
-						boardArray[9][i].getSquareScore("tletter");
-					}
+					switch (i) {
+					case 1: boardArray[9][i].getSquareScore("tl"); 
+						break;
+					case 5: boardArray[9][i].getSquareScore("tl");
+						break;
+					case 9: boardArray[9][i].getSquareScore("tl"); 
+						break;
+					case 13: boardArray[9][i].getSquareScore("tl");
+						break;
+				}
 				}
 				 K = arrayOfLines[10].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[10][i].getSquareName(K[i]);
-					if((i == 4) || (i == 10)){
-						boardArray[10][i].getSquareScore("dword");
+					switch (i) {
+						case 4: boardArray[10][i].getSquareScore("dw"); 
+							break;
+						case 10: boardArray[10][i].getSquareScore("dw");
+							break;
 					}
 				}
 				 L = arrayOfLines[11].split(" ");
 				for(i=0;i < 15;i++){
 					 boardArray[11][i].getSquareName(L[i]);
-					if((i ==0) || (i == 7) || (i == 14)){
-						boardArray[11][i].getSquareScore("dletter");
-					}
-					if((i == 3) || (i == 11)){
-						boardArray[11][i].getSquareScore("dword");
+					 switch (i) {
+						case 0: boardArray[11][i].getSquareScore("dl"); 
+							break;
+						case 7: boardArray[11][i].getSquareScore("dl");
+							break;
+						case 14: boardArray[11][i].getSquareScore("dl"); 
+							break;
+						case 3: boardArray[11][i].getSquareScore("dw");
+							break;
+						case 11: boardArray[11][i].getSquareScore("dw");
+							break;
 					}
 				}
 				 M = arrayOfLines[12].split(" ");
 				for(i=0;i < 15;i++){
 					boardArray[12][i].getSquareName(M[i]);
-					if((i == 2) || (i == 12)){
-						boardArray[12][i].getSquareScore("dword");
-					}
-					if((i == 6) || (i == 8)){
-						boardArray[12][i].getSquareScore("dletter");
+					switch (i) {
+						case 2: boardArray[12][i].getSquareScore("dw"); 
+							break;
+						case 6: boardArray[12][i].getSquareScore("dl");
+							break;
+						case 8: boardArray[12][i].getSquareScore("dl"); 
+							break;
+						case 12: boardArray[12][i].getSquareScore("dw");
+							break;
 					}
 				}
 				 N = arrayOfLines[13].split(" ");
 				for(i=0;i < 15;i++){
 					 boardArray[13][i].getSquareName(N[i]);
-					if((i == 1) || (i == 13)){
-						boardArray[13][i].getSquareScore("dword");
-					}
-					if((i == 5) || (i == 9)){
-						boardArray[13][i].getSquareScore("tletter");
+					 switch (i) {
+						case 1: boardArray[13][i].getSquareScore("dw"); 
+							break;
+						case 5: boardArray[13][i].getSquareScore("tl");
+							break;
+						case 9: boardArray[13][i].getSquareScore("tl"); 
+							break;
+						case 13: boardArray[13][i].getSquareScore("dw");
+							break;
 					}
 				}
 				 O = arrayOfLines[14].split(" ");
 				for(i=0;i < 15;i++){
 					 boardArray[14][i].getSquareName(O[i]);
-					if((i == 0) || (i == 7) || (i == 14)){
-						boardArray[14][i].getSquareScore("tword"); 
-					}
-					if((i == 3) || (i == 11)){
-					boardArray[14][i].getSquareScore("dletter");
+					 switch (i) {
+						case 0: boardArray[14][i].getSquareScore("tw"); 
+							break;
+						case 3: boardArray[14][i].getSquareScore("dl");
+							break;
+						case 7: boardArray[14][i].getSquareScore("tw"); 
+							break;
+						case 11: boardArray[14][i].getSquareScore("dl");
+							break;
 					}
 				}
 			
@@ -253,7 +337,7 @@ public class Board {
 					return false;
 				}
 		    	else{
-		    		flag1 = true;
+	  	    		flag1 = true;
 
 					if(axis.equalsIgnoreCase("vertical")){
 						if(startingrowCoordinate + (word.length()-1) >=15){
@@ -279,209 +363,249 @@ public class Board {
 			    }
     
     public void displayBoard() throws NullPointerException {
-	
+    System.out.println("    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15\n");
+	System.out.print("A   ");
     	for(int i=0; i < 15;i++){
+    		
     		if(boardArray[0][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[0][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[0][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[0][i].returnSquareName() + boardArray[0][i].returnSquareScore()+"\t|");
+    		else if(boardArray[0][i].returnSquareScore() != " "){
+			System.out.print(boardArray[0][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
 		}
+    	System.out.print("  A");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
+    	System.out.print("B   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[1][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[1][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[1][i].tileInSquareValue + " ");
     		}
-    		else{
-    		System.out.print("\t" + boardArray[1][i].returnSquareName()  + boardArray[1][i].returnSquareScore()+"\t|");
+    		else if(boardArray[1][i].returnSquareScore() != " "){
+			System.out.print(boardArray[1][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
-    	
+    	System.out.print("  B");
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("C   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[2][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[2][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[2][i].tileInSquareValue + " ");
     		}
-    		else{
-    		System.out.print("\t" + boardArray[2][i].returnSquareName() +  boardArray[2][i].returnSquareScore()+"\t|");
+    		else if(boardArray[2][i].returnSquareScore() != " "){
+			System.out.print(boardArray[2][i].returnSquareScore()  + " ");
     		}
-		}
+    		
+    		else {
+    			System.out.print("   ");
+    		}
+    		}
+    	System.out.print("  C");
+    	
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("D   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[3][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[3][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[3][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[3][i].returnSquareName() +  boardArray[3][i].returnSquareScore()+"\t|");
+    		else if(boardArray[3][i].returnSquareScore() != " "){
+			System.out.print(boardArray[3][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  D");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("E   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[4][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[4][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[4][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[4][i].returnSquareName() +  boardArray[4][i].returnSquareScore() +"\t|");
+    		else if(boardArray[4][i].returnSquareScore() != " "){
+			System.out.print(boardArray[4][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  E");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("F   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[5][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[5][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[5][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[5][i].returnSquareName() + boardArray[5][i].returnSquareScore() +"\t|");
+    		else if(boardArray[5][i].returnSquareScore() != " "){
+			System.out.print(boardArray[5][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  F");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("G   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[6][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[6][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[6][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[6][i].returnSquareName() + boardArray[6][i].returnSquareScore() +"\t|");
+    		else if(boardArray[6][i].returnSquareScore() != " "){
+			System.out.print(boardArray[6][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  G");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("H   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[7][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[7][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[7][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[7][i].returnSquareName() +  boardArray[7][i].returnSquareScore() +"\t|");
+    		else if(boardArray[7][i].returnSquareScore() != " "){
+			System.out.print(boardArray[7][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  H");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("I   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[8][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[8][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[8][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[8][i].returnSquareName() +  boardArray[8][i].returnSquareScore() +"\t|");
+    		else if(boardArray[8][i].returnSquareScore() != " "){
+			System.out.print(boardArray[8][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	
+    	System.out.print("  I");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("J   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[9][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[9][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[9][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[9][i].returnSquareName() +  boardArray[9][i].returnSquareScore() +"\t|" );
+    		else if(boardArray[9][i].returnSquareScore() != " "){
+			System.out.print(boardArray[9][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  J");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("K   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[10][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[10][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[10][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[10][i].returnSquareName() +  boardArray[10][i].returnSquareScore() +"\t|" );
+    		else if(boardArray[10][i].returnSquareScore() != " "){
+			System.out.print(boardArray[10][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  K");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("L   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[11][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[11][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[11][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[11][i].returnSquareName() + boardArray[11][i].returnSquareScore() +"\t|" );
+    		else if(boardArray[11][i].returnSquareScore() != " "){
+			System.out.print(boardArray[11][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  L");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
+    	System.out.print("M   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[12][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[12][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[12][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[12][i].returnSquareName() +  boardArray[12][i].returnSquareScore() +"\t|" );
+    		else if(boardArray[12][i].returnSquareScore() != " "){
+			System.out.print(boardArray[12][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  M");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("N   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[13][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[13][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[13][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[13][i].returnSquareName()  + boardArray[13][i].returnSquareScore() +"\t|");
+    		else if(boardArray[13][i].returnSquareScore() != " "){
+			System.out.print(boardArray[13][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	
+    	System.out.print("  N");
     	
     	System.out.println();
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-    	
+    	System.out.print("O   ");
     	for(int i=0; i < 15;i++){
     		if(boardArray[14][i].tileInSquareScore != 0){
-    			System.out.print("\t" + boardArray[14][i].tileInSquareValue +"\t|");
+    			System.out.print(" " + boardArray[14][i].tileInSquareValue + " ");
     		}
-    		else{
-			System.out.print("\t" + boardArray[14][i].returnSquareName()  + boardArray[14][i].returnSquareScore() +"\t|" );
+    		else if(boardArray[14][i].returnSquareScore() != " "){
+			System.out.print(boardArray[14][i].returnSquareScore() + " ");
+    		}
+    		
+    		else {
+    			System.out.print("   ");
     		}
     		}
+    	System.out.print("  O");
+    	System.out.println("\n\n    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15");
     	
     	
     }
