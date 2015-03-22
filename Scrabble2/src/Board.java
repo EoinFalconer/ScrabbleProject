@@ -48,6 +48,22 @@ public class Board {
             } 
             }
     }
+    public Boolean isEmpty(){
+    	boolean flag = true;
+    	for(int i=0;i<15;i++){
+    		for(int j=0;j<15;j++){
+    			if(boardArray[i][j].tileInSquareValue != ' '){
+    				flag = true;
+    				
+    			}
+    			else{
+    				flag = false;
+    				break;
+    			}
+    		}
+    	}
+    	return flag;
+    }
 	
     public void resestBoard(){
     	for (int i = 0 ; i<15 ; i++){
@@ -62,12 +78,10 @@ public class Board {
     	 BufferedReader b1 = null;
     	 
     	 URL BoardURL = null;
-				try 
-				{
+				try {
 					BoardURL = new URL("http://breynolds.netsoc.com/boardtxt.txt");
 				} 
-				catch (MalformedURLException e1) 
-				{
+				catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				}
 		 try{
@@ -634,7 +648,7 @@ public class Board {
 		        			columnCoordinate++;
 		        	}
 		        	
-		        	else if(axis.equalsIgnoreCase("horizontal")) {
+		        	else if(axis.equalsIgnoreCase("vertical")) {
 	        			if((rowCoordinate == 7) && (columnCoordinate == 7)) { 
 	        					flag = true;
 	        					break;
@@ -646,7 +660,19 @@ public class Board {
         return flag;
     }
     
-    public Square insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
+    public String getSquareScore(String squareName){
+    	String temp = "";
+    	for(int i=0;i<15;i++){
+    		for(int j=0;j<15;j++){
+    			if(squareName.equalsIgnoreCase(boardArray[i][j].squareName)){
+    				temp = boardArray[i][j].squareScore;
+    			}
+    		}
+    	}
+    	return temp;
+    }
+    
+    public void insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
     	        int rCoordinate=0, cCoordinate=0;    
     	 
     	        for(int i=0;i<15;i++){
@@ -670,11 +696,9 @@ public class Board {
 	    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){
 		    	        			
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
-		    	        	
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
 		    	        			System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
 		    	        			cCoordinate++;
-		    	        				f.removeFromFrame(letterToBeInserted);
 		    	        		}
 		    	        		
 		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {
@@ -685,12 +709,9 @@ public class Board {
 		    	        			
 		    	        			else {
 		    	        				//stop loop
-		    	        				System.out.println("error - letter doesnt match whats on board you idiot");
-		    	        			}
-		    	   
+		    	        				System.out.println("ONE BOY");
+		    	        			}		    	   
 		    	        		}
-		    	        		
-		    	        		
 	    	        		}
 	    	        		
 	    	        		else if(axis.equalsIgnoreCase("vertical")) {
@@ -702,23 +723,19 @@ public class Board {
 		    	        			System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
 
 		    	        			rCoordinate++;
-		    	        			f.removeFromFrame(letterToBeInserted);
 		    	        		}
 		    	        		
 		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {
 		    	        			
 		    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 		    	        				rCoordinate++;
-		    	        			}
-		    	        			
+		    	        			}		
 		    	        			else {
 		    	        				//stop loop
-		    	        				System.out.println("error - letter doesnt match whats on board you idiot");
-		    	        			}
-		    	   
+		    	        				System.out.println("TWO BOY");
+		    	        			}		    	   
 		    	        		}
 	    	        		}
-
 	    	        	}
 	    	        	
 	    	        	else { 
@@ -727,17 +744,12 @@ public class Board {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 			    	        				cCoordinate++;
 			    	        			}
-			    	        			
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("error - letter doesnt match whats on board you idiot");
-			    	        			}
-			    	   
+			    	        				System.out.println("THREE BOY");
+			    	        			}	    	   
 			    	        		}
-			    	        		
-			    	        		
-		    	        		}
-		    	        		
+		    	        		}    	        		
 		    	        		else if(axis.equalsIgnoreCase("vertical")) {
 		    	        			if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
@@ -746,20 +758,12 @@ public class Board {
 			    	        			
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("error - letter doesnt match whats on board you idiot");
+			    	        				System.out.println("FOUR BOY");
 			    	        			}
-			    	   
-			    	        		}
-		    	        			
-		    	        		}
-	    	        		
-	    	        		
-	    	        	}
-	    	        	
-	    	      
-    	        
+			    	        	}
+		    	        	}	
+	    	        	}  
     	        }
-    	        return null;
     	  }
     	               	               
     public boolean checkWordIsLegal(String chooseWord,String startingCoordinate, String axis) throws ArrayIndexOutOfBoundsException{
@@ -771,8 +775,7 @@ public class Board {
 	    				if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
 	    					rowCoordinate = i;
 	    					columnCoordinate = j;
-	    					break;
-	    					
+	    					break;	
 	    				}
 	    			}
 	    		}
@@ -837,19 +840,15 @@ public class Board {
     	  }
     
     public boolean isSquareEmpty( int i, int j){			
-	
-	boolean flag ; 
-	
-		if ( boardArray[i][j].tileInSquareValue == ' '){
-			 
-			flag = true ; 
-		}
+    	boolean flag ; 
 		
-		else {
-			
-	    	flag = false ; 
-		}
+			if ( boardArray[i][j].tileInSquareValue == ' '){
+				flag = true ; 
+			}	
+			else {	
+		    	flag = false ; 
+			}
 	
-	return flag ; 
+		return flag ; 
     }
 }

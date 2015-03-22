@@ -49,7 +49,7 @@ public class Pool implements PoolInterface{
 				}	
 				
 		/*
-		 * This put tiles from frame back intot the pool
+		 * This put tiles from frame back into the pool
 		 */
 	 
 			public Tile frameToPool(int rank, Tile e)			

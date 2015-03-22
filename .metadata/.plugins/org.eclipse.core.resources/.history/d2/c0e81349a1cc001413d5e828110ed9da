@@ -1,0 +1,43 @@
+/**
+ * /*
+ *  B’sWhyteFalcon
+ *	Assignment  3
+ *	Ben Reynolds – 13309656
+ *	Conor Whyte -   13324911
+ *	Eoin Falconer -   13331016
+ *
+ *  @author B'sWhyteFalcon
+ */
+
+public class Scrabble {
+
+	public static void main(String[] args) throws NullPointerException, RankOutOfBoundsException, VectorFullException {
+		
+		Board b = new Board();
+		b.populateBoard();
+		
+		UI ui = new UI();
+		
+		Pool newPool = new Pool() ;
+		newPool.populateNewPool();
+		System.out.println(ui.newGameMessage());
+		Player p = new Player(ui.getName());
+		Player p2 = new Player(ui.getName());
+		
+		Frame playerOneFrame = new Frame(p);					
+		playerOneFrame.refillFrame(newPool);							
+		
+		Frame playerTwoFrame = new Frame(p2);					
+		playerTwoFrame.refillFrame(newPool);
+		
+		int controlVariable = 0;
+		
+		System.out.println(ui.displayScoreNameAndFrame(p.playerid, p.getScore(), playerOneFrame.displayFrame()));
+		
+		ui.promptPlayer(p, p2, controlVariable);
+		
+		
+	
+	}
+
+}

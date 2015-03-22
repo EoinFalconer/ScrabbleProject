@@ -10,6 +10,8 @@
 				Pool newPool = new Pool() ;   			
 				newPool.populateNewPool();	
 				
+				UI ui = new UI();
+				
 				Board b = new Board();
 				b.populateBoard();
 				boolean isEmptyTest = b.isSquareEmpty(7, 7);

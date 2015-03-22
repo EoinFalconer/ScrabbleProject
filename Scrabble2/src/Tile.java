@@ -10,6 +10,7 @@
 public class Tile {
 	char tname;
 	int score;
+	String onSpecialSquare;
 	public Tile(char c, int d){
 		tname = c;
 		score = d;

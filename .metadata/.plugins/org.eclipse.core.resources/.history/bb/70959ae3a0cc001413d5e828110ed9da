@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+/**
+ * /*
+ *  B’sWhyteFalcon
+ *	Assignment  3
+ *	Ben Reynolds – 13309656
+ *	Conor Whyte -   13324911
+ *	Eoin Falconer -   13331016
+ *
+ *  @author B'sWhyteFalcon
+ */
+
+public class UI {
+	
+	Board b = new Board();
+	
+	Scanner in = new Scanner(System.in);
+	
+	 public UI(){
+		 
+	 }
+	 
+	 public String promptPlayer(Player playerOne, Player playerTwo, int evenOdd) {
+		 String prompt ="";
+		 int controlVariable = evenOdd % 2;
+		 	
+		 switch(controlVariable) {
+		 	case 0:	
+		 		prompt = playerOne.playerid + " it is your turn.";
+		 		break;
+		 	case 1:
+		 		prompt = playerTwo.playerid + " it is your turn.";
+		 		break;
+		 }
+		 return prompt;
+	 } 
+	 
+	 public void checkInput (String inputString) {
+		 
+		String splitInput[] = inputString.split(" ");
+		
+		switch(splitInput[0]) {
+			case "QUIT": 
+				// Quit Game;
+				break;
+			case "PASS":
+				//increment control variable
+				break;
+			case "EXCHANGE": 
+				//take splitInput[1] and call replace frame
+				break;
+			case "HELP":
+				System.out.println("HELP MESSAGE");
+				break;
+			default:
+				//splitInput[0] = b.
+				//split[1] is the axis
+				//split[2] is the word	
+		} 
+	 }
+	 
+	 public String getName() {
+		 System.out.println("Whats your name player one?");
+		 String name = in.next();
+		 
+		 return name;
+		 
+	 }
+	 
+	 public String newGameMessage() {
+		String message = "Welcome To B'sWhyteFalcons Scrabble Game. Enjoy Playing.";
+		 
+		 return message;
+		 
+	 }
+
+}

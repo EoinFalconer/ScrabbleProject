@@ -1,0 +1,78 @@
+/**
+ * /*
+ *  B’sWhyteFalcon
+ *	Assignment  3
+ *	Ben Reynolds – 13309656
+ *	Conor Whyte -   13324911
+ *	Eoin Falconer -   13331016
+ *
+ *  @author B'sWhyteFalcon
+ */
+
+public class Scrabble {
+	
+
+
+	public static void main(String[] args) throws NullPointerException, RankOutOfBoundsException, VectorFullException {
+		
+		Board b = new Board();
+		b.populateBoard();
+		
+		UI ui = new UI();
+		
+		Pool newPool = new Pool() ;
+		newPool.populateNewPool();
+		System.out.println(ui.newGameMessage());
+		Player p = new Player(ui.getName());
+		Player p2 = new Player(ui.getName());
+		
+		Frame playerOneFrame = new Frame(p);					
+		playerOneFrame.refillFrame(newPool);							
+		
+		Frame playerTwoFrame = new Frame(p2);					
+		playerTwoFrame.refillFrame(newPool);
+		
+		
+		System.out.println(ui.displayScoreNameAndFrame(p.playerid, p.getScore(), playerOneFrame.displayFrame()));
+		System.out.println(ui.displayScoreNameAndFrame(p2.playerid, p2.getScore(), playerTwoFrame.displayFrame()));
+
+		b.displayBoard();
+		
+		System.out.println("\n" + ui.promptPlayer(p, p2)); 
+		
+		String genericInputString = ui.takeGenericInput();
+		String splitInput[] = genericInputString.split(" ");
+		String check = ui.checkInput(genericInputString);
+		
+		if(check.equals("exchange")) {
+			char ch;	
+
+				for (int i = 0; i < splitInput[1].length(); i++){
+				    ch = splitInput[1].charAt(i);        
+				    
+							
+				    if( ui.controlGameFlow % 2 == 0)
+					{
+						playerOneFrame.moveTileToPool(ch, newPool);		// puts choosen letter back into the pool
+						playerOneFrame.refillFrame(newPool);	
+					}
+				    else {
+				    	playerTwoFrame.moveTileToPool(ch, newPool);		// puts choosen letter back into the pool
+						playerTwoFrame.refillFrame(newPool);
+				    }
+				i++;
+			}
+		}
+		else if(check.equals("placeonboard")) {
+			//place on board
+		}
+		
+		
+		System.out.println(ui.promptPlayer(p, p2));
+		
+		
+		
+	
+	}
+
+}
