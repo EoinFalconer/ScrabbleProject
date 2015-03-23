@@ -84,7 +84,6 @@ public class Player implements PlayerInterface  {
 		
 		for(int i=0;i<enteredWord.length();i++){
 			
-			enteredWord = enteredWord.toUpperCase();
 			char letterKey = enteredWord.charAt(i);
 			
 			for(int j=0;j<f.frameSize();j++){
@@ -99,15 +98,13 @@ public class Player implements PlayerInterface  {
 					if(axis.equalsIgnoreCase("horizontal")){
 						temp.onSpecialSquare = (b.getSquareScore(startingCoordinate.charAt(0) + Integer.toString(k)));
 						k++;
-					}
+				}
 					else{
-							System.out.println(Integer.toString(tempLetter) + temp6);
 							temp.onSpecialSquare = b.getSquareScore(Integer.toString(tempLetter) + temp6);
 							tempLetter++;
 						}
 					System.out.println("special Score: " + temp.onSpecialSquare);
 					if(temp.onSpecialSquare.equalsIgnoreCase("dl")){
-						System.out.println("double letter");
 						playerScore = playerScore + (temp.score * 2);
 						immediateScore = immediateScore + (temp.score *2);
 					}

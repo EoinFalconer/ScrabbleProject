@@ -101,13 +101,11 @@ public class Player implements PlayerInterface  {
 						k++;
 					}
 					else{
-							System.out.println(Integer.toString(tempLetter) + temp6);
 							temp.onSpecialSquare = b.getSquareScore(Integer.toString(tempLetter) + temp6);
 							tempLetter++;
 						}
 					System.out.println("special Score: " + temp.onSpecialSquare);
 					if(temp.onSpecialSquare.equalsIgnoreCase("dl")){
-						System.out.println("double letter");
 						playerScore = playerScore + (temp.score * 2);
 						immediateScore = immediateScore + (temp.score *2);
 					}

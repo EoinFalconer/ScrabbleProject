@@ -684,7 +684,7 @@ public class Board {
     	        		}
     	        	}
     	        }
-    	        chooseWord = chooseWord.toUpperCase();
+    	      
     	        i = 0;
     	        char letterToBeInserted;	
     	        for (int i=0; i < chooseWord.length(); i++) { // while elements in theword to be inserted 
@@ -708,7 +708,7 @@ public class Board {
 			    	
 			    	        			}
 			    	        			else {
-			    	        				System.out.println("1.You cant overwrite a letter");
+			    	        				System.out.println("You cant overwrite a letter");
 			    	        				cCoordinate++;
 			    	        			}
 			    	    		    	   
@@ -732,7 +732,7 @@ public class Board {
 		    	        				rCoordinate++;
 		    	        			}
 		    	        			else {
-		    	        				System.out.println("2.You cant overwrite a letter");
+		    	        				System.out.println("You cant overwrite a letter");
 		    	        				rCoordinate++;
 		    	        			}
 		    	   
@@ -740,29 +740,29 @@ public class Board {
 	    	        		}
 	    	        	}
 	    	        	
-	    	        	else if(!f.isTileInFrame(letterToBeInserted)) { 					// case that the tile isnt in frame
+	    	        	else { 					// case that the tile isnt in frame
 		    	        		if(axis.equalsIgnoreCase("horizontal")) {
-			    	        		if(!isSquareEmpty(rCoordinate, cCoordinate)) {
+			    	        		if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 			    	        				cCoordinate++;
 			    	        			}
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("3.can't overwrite letter");
+			    	        				System.out.println("can't overwrite letter");
 			    	        				cCoordinate++;
 			    	        				
 			    	        			}	    	   
 			    	        		}
 		    	        		}    	        		
 		    	        		else if(axis.equalsIgnoreCase("vertical")) {
-		    	        			if(!isSquareEmpty(rCoordinate, cCoordinate)) {
+		    	        			if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 			    	        				rCoordinate++;
 			    	        			}
 			    	        			
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("4.can't overwrite letter");
+			    	        				System.out.println("can't overwrite letter");
 			    	        				rCoordinate++;
 			    	        			}
 			    	        	}

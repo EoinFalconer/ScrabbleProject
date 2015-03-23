@@ -111,19 +111,20 @@ public class Scrabble {
 				}
 			}
 		
-			if(newPool.size() == 0){
-				endGame = true;
-			}
-			else{
-				endGame = false;
-			}
-
+		if(newPool.size() == 0){
+			endGame = true;
+		}
+		else{
+			endGame = false;
 		}
 		
-		if((p.getScore() > p2.getScore()) && endGame){
+		
+		
+		}
+		if((p.getScore() > p2.getScore()) && !endGame){
 			System.out.println("Well done " + p.getName() + " you have won.\nYou suck"+p2.getName());
 		}
-		else if((p.getScore() < p2.getScore()) && endGame){
+		else if((p.getScore() < p2.getScore()) && !endGame){
 			System.out.println("Well done " + p2.getName() + " you have won.\nYou suck"+p.getName());
 		}
 	}

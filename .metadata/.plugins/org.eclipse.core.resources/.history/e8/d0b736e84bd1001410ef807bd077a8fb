@@ -79,8 +79,9 @@ public class Player implements PlayerInterface  {
 		boolean isTword = false;
 		int immediateScore = 0;
 		int tempLetter = Integer.valueOf(startingCoordinate.charAt(0));
-		String temp6 = String.valueOf(startingCoordinate.charAt(1));
+		String tempNumber = String.valueOf(startingCoordinate.charAt(1));
 		int k=0;
+		String tempLet = "";
 		
 		for(int i=0;i<enteredWord.length();i++){
 			
@@ -101,8 +102,9 @@ public class Player implements PlayerInterface  {
 						k++;
 					}
 					else{
-							System.out.println(Integer.toString(tempLetter) + temp6);
-							temp.onSpecialSquare = b.getSquareScore(Integer.toString(tempLetter) + temp6);
+							//System.out.println(Character.toChars(tempLetter) + tempNumber);
+							tempLet = Character.toString(Character.toChars(tempLetter));
+							temp.onSpecialSquare = b.getSquareScore(Character.toChars(tempLetter) + tempNumber);
 							tempLetter++;
 						}
 					System.out.println("special Score: " + temp.onSpecialSquare);

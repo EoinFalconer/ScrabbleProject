@@ -155,7 +155,7 @@ public class Frame implements FrameInterface {
 						 
 					  }
 					 
-					  else if (cUpper == arrayOfTiles[i].tname) {
+					  else if (cUpper == arrayOfTiles[i].getName()) {
 							flag = true;
 							// testing System.out.println(cUpper + " " + arrayOfTiles[i].getName());
 						}

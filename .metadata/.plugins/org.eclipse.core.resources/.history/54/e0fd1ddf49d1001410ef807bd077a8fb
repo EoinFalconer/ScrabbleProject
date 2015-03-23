@@ -101,7 +101,6 @@ public class Player implements PlayerInterface  {
 						k++;
 					}
 					else{
-							System.out.println(Integer.toString(tempLetter) + temp6);
 							temp.onSpecialSquare = b.getSquareScore(Integer.toString(tempLetter) + temp6);
 							tempLetter++;
 						}

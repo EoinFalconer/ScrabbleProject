@@ -684,7 +684,7 @@ public class Board {
     	        		}
     	        	}
     	        }
-    	        chooseWord = chooseWord.toUpperCase();
+    	      
     	        i = 0;
     	        char letterToBeInserted;	
     	        for (int i=0; i < chooseWord.length(); i++) { // while elements in theword to be inserted 
@@ -742,7 +742,7 @@ public class Board {
 	    	        	
 	    	        	else if(!f.isTileInFrame(letterToBeInserted)) { 					// case that the tile isnt in frame
 		    	        		if(axis.equalsIgnoreCase("horizontal")) {
-			    	        		if(!isSquareEmpty(rCoordinate, cCoordinate)) {
+			    	        		if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 			    	        				cCoordinate++;
 			    	        			}
@@ -755,7 +755,7 @@ public class Board {
 			    	        		}
 		    	        		}    	        		
 		    	        		else if(axis.equalsIgnoreCase("vertical")) {
-		    	        			if(!isSquareEmpty(rCoordinate, cCoordinate)) {
+		    	        			if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 			    	        				rCoordinate++;
 			    	        			}
