@@ -102,7 +102,7 @@ public class Scrabble {
 					System.out.println("This word is not legal");
 				}
 				else{
-					b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerTwoFrame);
+					b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerOneFrame);
 					p2.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
 					playerTwoFrame.refillFrame(newPool);
 					System.out.println(playerTwoFrame.displayFrame());

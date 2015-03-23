@@ -746,7 +746,7 @@ public class Board {
 			    	        			}
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("error three");
+			    	        				System.out.println("THREE BOY");
 			    	        			}	    	   
 			    	        		}
 		    	        		}    	        		
@@ -758,7 +758,7 @@ public class Board {
 			    	        			
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("error four");
+			    	        				System.out.println("FOUR BOY");
 			    	        			}
 			    	        	}
 		    	        	}	

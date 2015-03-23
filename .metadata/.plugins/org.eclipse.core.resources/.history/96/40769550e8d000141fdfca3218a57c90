@@ -697,7 +697,7 @@ public class Board {
 		    	        			
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
-		    	        			//System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
+		    	        			System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
 		    	        			cCoordinate++;
 		    	        		}
 		    	        		
@@ -709,7 +709,7 @@ public class Board {
 		    	        			
 		    	        			else {
 		    	        				//stop loop
-		    	        				System.out.println("Error one");
+		    	        				System.out.println("ONE BOY");
 		    	        			}		    	   
 		    	        		}
 	    	        		}
@@ -720,7 +720,7 @@ public class Board {
 		    	        			
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
-		    	        			//System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
+		    	        			System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
 
 		    	        			rCoordinate++;
 		    	        		}
@@ -732,7 +732,7 @@ public class Board {
 		    	        			}		
 		    	        			else {
 		    	        				//stop loop
-		    	        				System.out.println("Error two");
+		    	        				System.out.println("TWO BOY");
 		    	        			}		    	   
 		    	        		}
 	    	        		}
@@ -746,7 +746,7 @@ public class Board {
 			    	        			}
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("error three");
+			    	        				System.out.println("THREE BOY");
 			    	        			}	    	   
 			    	        		}
 		    	        		}    	        		
@@ -758,7 +758,7 @@ public class Board {
 			    	        			
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("error four");
+			    	        				System.out.println("FOUR BOY");
 			    	        			}
 			    	        	}
 		    	        	}	

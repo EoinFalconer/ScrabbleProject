@@ -93,16 +93,16 @@ public class Scrabble {
 				}
 			else{
 				if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
-					System.out.println("First word needs to be placed threw H8");
-				}
+					System.out.println("yo");
+				} 
 				else if(!b.isPlacedInBoard(splitInput[0], splitInput[1], splitInput[2])){
-					System.out.println("This is out of bounds - you must place in boundry of the board.");
+					System.out.println("This is out of bounds");
 				}
 				else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2])){
 					System.out.println("This word is not legal");
 				}
 				else{
-					b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerTwoFrame);
+					b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerOneFrame);
 					p2.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
 					playerTwoFrame.refillFrame(newPool);
 					System.out.println(playerTwoFrame.displayFrame());

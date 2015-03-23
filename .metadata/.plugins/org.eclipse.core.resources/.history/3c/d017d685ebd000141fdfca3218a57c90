@@ -1,6 +1,6 @@
 /*
  *  B’sWhyteFalcon
- *	Assignment  1
+ *	Assignment  1
  *	Ben Reynolds – 13309656
  *	Conor Whyte -   13324911
  *	Eoin Falconer -   13331016
@@ -120,7 +120,7 @@ public class Player implements PlayerInterface  {
 					else{
 						playerScore = playerScore + temp.score;
 					}
-					f.removeFromFrame(letterKey);
+					f.removeFromFrame(Character.toUpperCase(letterKey));
 				}
 					
 				}
