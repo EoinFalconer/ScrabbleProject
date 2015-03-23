@@ -83,7 +83,6 @@ public class Player implements PlayerInterface  {
 		int k=0;
 		
 		for(int i=0;i<enteredWord.length();i++){
-			
 			char letterKey = enteredWord.charAt(i);
 			
 			for(int j=0;j<f.frameSize();j++){
@@ -104,18 +103,18 @@ public class Player implements PlayerInterface  {
 							tempLetter++;
 						}
 					
-					if(temp.onSpecialSquare.equalsIgnoreCase("dl")){
+					if(temp.onSpecialSquare.equalsIgnoreCase("dletter")){
 						playerScore = playerScore + (temp.score * 2);
 						immediateScore = immediateScore + (temp.score *2);
 					}
-					else if(temp.onSpecialSquare.equalsIgnoreCase("tl")){
+					else if(temp.onSpecialSquare.equalsIgnoreCase("tletter")){
 						playerScore = playerScore + (temp.score * 3);
 						immediateScore = immediateScore + (temp.score *3);
 					}
-					else if(temp.onSpecialSquare.equalsIgnoreCase("dw")){
+					else if(temp.onSpecialSquare.equalsIgnoreCase("dword")){
 						isDword = true;
 					}
-					else if(temp.onSpecialSquare.equalsIgnoreCase("tw")){
+					else if(temp.onSpecialSquare.equalsIgnoreCase("tword")){
 						isTword = true;
 					}
 					else{

@@ -83,7 +83,6 @@ public class Player implements PlayerInterface  {
 		int k=0;
 		
 		for(int i=0;i<enteredWord.length();i++){
-			
 			char letterKey = enteredWord.charAt(i);
 			
 			for(int j=0;j<f.frameSize();j++){

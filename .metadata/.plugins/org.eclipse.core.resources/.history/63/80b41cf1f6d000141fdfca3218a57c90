@@ -742,12 +742,11 @@ public class Board {
 		    	        		if(axis.equalsIgnoreCase("horizontal")) {
 			    	        		if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-			    	        				cCoordinate++;
+			    	        				rCoordinate++;
 			    	        			}
 			    	        			else {
 			    	        				//stop loop
 			    	        				System.out.println("can't overwrite letter");
-			    	        				cCoordinate++;
 			    	        				
 			    	        			}	    	   
 			    	        		}
@@ -755,13 +754,13 @@ public class Board {
 		    	        		else if(axis.equalsIgnoreCase("vertical")) {
 		    	        			if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-			    	        				rCoordinate++;
+			    	        				cCoordinate++;
 			    	        			}
 			    	        			
 			    	        			else {
 			    	        				//stop loop
 			    	        				System.out.println("can't overwrite letter");
-			    	        				rCoordinate++;
+			    	        				
 			    	        			}
 			    	        	}
 		    	        	}	

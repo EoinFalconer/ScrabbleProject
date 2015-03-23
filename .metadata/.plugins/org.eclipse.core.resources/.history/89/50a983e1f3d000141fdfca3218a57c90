@@ -705,7 +705,6 @@ public class Board {
 			    	        			
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 			    	        				cCoordinate++;
-			    	
 			    	        			}
 			    	        			else {
 			    	        				System.out.println("You cant overwrite a letter");
@@ -747,8 +746,6 @@ public class Board {
 			    	        			else {
 			    	        				//stop loop
 			    	        				System.out.println("can't overwrite letter");
-			    	        				cCoordinate++;
-			    	        				
 			    	        			}	    	   
 			    	        		}
 		    	        		}    	        		
@@ -761,7 +758,6 @@ public class Board {
 			    	        			else {
 			    	        				//stop loop
 			    	        				System.out.println("can't overwrite letter");
-			    	        				rCoordinate++;
 			    	        			}
 			    	        	}
 		    	        	}	

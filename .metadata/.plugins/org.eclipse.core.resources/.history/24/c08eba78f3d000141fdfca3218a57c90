@@ -675,7 +675,7 @@ public class Board {
     public void insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
     	        int rCoordinate=0, cCoordinate=0;    
     	 
-    	        for(int i=0;i<15;i++){						//initilises rcooridinate and ccoordinate.
+    	        for(int i=0;i<15;i++){
     	        	for(int j=0;j<15;j++){
     	        		if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
     	        			rCoordinate = i;
@@ -686,37 +686,37 @@ public class Board {
     	        }
     	      
     	        i = 0;
-    	        char letterToBeInserted;	
-    	        for (int i=0; i < chooseWord.length(); i++) { // while elements in theword to be inserted 
+    	        char letterToBeInserted;
+    	        for (int i=0; i < chooseWord.length(); i++) { // while elements in the array 
     	        	
     	        	letterToBeInserted = chooseWord.charAt(i);
-	    	        	if(f.isTileInFrame(letterToBeInserted)) {  		// case that the tile is in frame.
+	    	        	if(f.isTileInFrame(letterToBeInserted)) {  
 	    	        		
-		    	        		if(axis.equalsIgnoreCase("horizontal")) {			//horizontal and tile is in frame	
-		    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){			//horizontal and tile is in frame and square is empty
-			    	        			
-			    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
-			    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
-			    	        			//System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
-			    	        			cCoordinate++;
-			    	        		}
-			    	        		
-			    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) { //horizontal and tile is in frame and square isnt empty
-			    	        			
-			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-			    	        				cCoordinate++;
-			    	
-			    	        			}
-			    	        			else {
-			    	        				System.out.println("You cant overwrite a letter");
-			    	        			}
-			    	    		    	   
-			    	        		}
+	    	        		if(axis.equalsIgnoreCase("horizontal")) {		
+	    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){
+		    	        			
+		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
+		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
+		    	        			//System.out.println(boardArray[rCoordinate][cCoordinate].tileInSquareScore);
+		    	        			cCoordinate++;
 		    	        		}
+		    	        		
+		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {
+		    	        			
+		    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
+		    	        				cCoordinate++;
+		    	        			}
+		    	        			
+		    	        			else {
+		    	        				//stop loop
+		    	        				System.out.println("Error one");
+		    	        			}		    	   
+		    	        		}
+	    	        		}
 	    	        		
-	    	        		else if(axis.equalsIgnoreCase("vertical")) {   // vertical and tile is in frame
+	    	        		else if(axis.equalsIgnoreCase("vertical")) {
 	    	        			
-	    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){ 		// vertical and tile is in frame and squares empty
+	    	        			if(isSquareEmpty(rCoordinate, cCoordinate)){
 		    	        			
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareValue = letterToBeInserted;
 		    	        			boardArray[rCoordinate][cCoordinate].tileInSquareScore = f.getTileScore(letterToBeInserted);
@@ -725,20 +725,20 @@ public class Board {
 		    	        			rCoordinate++;
 		    	        		}
 		    	        		
-		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {			// vertical and tile is in frame and squares not empty
+		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {
 		    	        			
 		    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
 		    	        				rCoordinate++;
-		    	        			}
+		    	        			}		
 		    	        			else {
-		    	        				System.out.println("You cant overwrite a letter");
-		    	        			}
-		    	   
+		    	        				//stop loop
+		    	        				System.out.println("Error two");
+		    	        			}		    	   
 		    	        		}
 	    	        		}
 	    	        	}
 	    	        	
-	    	        	else { 					// case that the tile isnt in frame
+	    	        	else { 
 		    	        		if(axis.equalsIgnoreCase("horizontal")) {
 			    	        		if(isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
@@ -746,9 +746,7 @@ public class Board {
 			    	        			}
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("can't overwrite letter");
-			    	        				cCoordinate++;
-			    	        				
+			    	        				System.out.println("error three");
 			    	        			}	    	   
 			    	        		}
 		    	        		}    	        		
@@ -760,8 +758,7 @@ public class Board {
 			    	        			
 			    	        			else {
 			    	        				//stop loop
-			    	        				System.out.println("can't overwrite letter");
-			    	        				rCoordinate++;
+			    	        				System.out.println("error four");
 			    	        			}
 			    	        	}
 		    	        	}	
