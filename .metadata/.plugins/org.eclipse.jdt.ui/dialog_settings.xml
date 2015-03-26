@@ -15,12 +15,13 @@
 	<section name="JavaElementSearchActions">
 	</section>
 	<section name="FatJarPackageWizard">
-		<item value="/home/ben/Dropbox/Second Year/Second Semester/Software Engineering Project/Assignment 2/Submit_Folder/PoolTestJar.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
-		<item value="PoolTest - Scrabble2" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="/home/ben/Dropbox/Second Year/Second Semester/Software Engineering Project/Assignment 3/ScrabbleJar.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="Scrabble - Scrabble2" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
 		<item value="/home/ben/Scrabble - Git" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/home/ben/Dropbox/Second Year/Second Semester/Software Engineering Project/Assignment 3/ScrabbleJar.jar"/>
 			<item value="/home/ben/Dropbox/Second Year/Second Semester/Software Engineering Project/Assignment 2/Submit_Folder/PoolTestJar.jar"/>
 			<item value="/home/ben/Dropbox/Second Year/Second Semester/Software Engineering Project/Assignment 2/Submit_Folder/PlayerTestJar.jar"/>
 			<item value="/home/ben/Dropbox/Second Year/Second Semester/Software Engineering Project/Assignment 2/Submit_Folder/FrameTestJar.jar"/>
@@ -31,10 +32,12 @@
 			<item value=".xml"/>
 		</list>
 	</section>
-	<section name="quick_assist_proposal_size">
+	<section name="RenameInformationPopup">
 	</section>
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
+	</section>
+	<section name="quick_assist_proposal_size">
 	</section>
 </section>

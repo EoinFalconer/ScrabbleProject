@@ -47,7 +47,7 @@ public class Scrabble {
 		
 		String splitInput[] = new String[10];
 		String genericInputString = ui.takeGenericInput();
-		splitInput = genericInputString.split("-");
+		splitInput = genericInputString.split(" ");
 		String check = ui.checkInput(genericInputString);
 		//if((!splitInput[0].equalsIgnoreCase("exchange")) && (!splitInput[2].equalsIgnoreCase("horizontal")) && (!splitInput[2].equalsIgnoreCase("vertical"))){
 		//	System.out.println("This is not a valid input please try again.\n");

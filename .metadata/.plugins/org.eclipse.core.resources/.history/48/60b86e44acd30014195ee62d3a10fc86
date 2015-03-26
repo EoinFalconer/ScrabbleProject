@@ -35,8 +35,7 @@ public class Scrabble {
 		boolean endGame = false;
 		
 		int incrementWhenPlaceOnBoard = 0;
-		
-		
+		int incrementWhenExchange = 0;
 		
 		while(!endGame){
 		System.out.println(ui.displayScoreNameAndFrame(p.playerid, p.getScore(), playerOneFrame.displayFrame()));
@@ -62,13 +61,14 @@ public class Scrabble {
 						playerOneFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerOneFrame.refillFrame(newPool);
 						ui.controlGameFlow++;
-						
+						incrementWhenExchange++;
 					}
 				    else {
 				    	playerTwoFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerTwoFrame.refillFrame(newPool);
+						playerTwoFrame.displayFrame();
 						ui.controlGameFlow++;
-					
+						incrementWhenExchange++;
 				    }
 				    
 			}
@@ -82,7 +82,7 @@ public class Scrabble {
 					System.out.println("This is out of bounds");
 					
 					}
-					else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard != 0)  ){
+					else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2]) && ((incrementWhenPlaceOnBoard != 0) || (incrementWhenExchange == 0)) ){
 					System.out.println("This word is not legal");
 					
 					}
@@ -101,7 +101,7 @@ public class Scrabble {
 				else if(!b.isPlacedInBoard(splitInput[0], splitInput[1], splitInput[2])){
 					System.out.println("This is out of bounds - you must place in boundry of the board.");
 				}
-				else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard != 0) ){
+				else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2]) && ((incrementWhenPlaceOnBoard != 0) || (incrementWhenExchange == 0)) ){
 					System.out.println("This word is not legal");
 				}
 				else{

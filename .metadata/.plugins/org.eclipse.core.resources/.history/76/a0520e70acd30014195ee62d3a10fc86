@@ -35,8 +35,7 @@ public class Scrabble {
 		boolean endGame = false;
 		
 		int incrementWhenPlaceOnBoard = 0;
-		
-		
+		int incrementWhenExchange = 0;
 		
 		while(!endGame){
 		System.out.println(ui.displayScoreNameAndFrame(p.playerid, p.getScore(), playerOneFrame.displayFrame()));
@@ -62,13 +61,13 @@ public class Scrabble {
 						playerOneFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerOneFrame.refillFrame(newPool);
 						ui.controlGameFlow++;
-						
+						incrementWhenExchange++;
 					}
 				    else {
 				    	playerTwoFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerTwoFrame.refillFrame(newPool);
 						ui.controlGameFlow++;
-					
+						incrementWhenExchange++;
 				    }
 				    
 			}

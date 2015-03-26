@@ -51,7 +51,6 @@ public class UI {
 				break;
 			case "PASS":
 				System.out.println("PASSED ROUND");
-				controlWhatHappens = "pass";
 				controlGameFlow++;		
 				break;
 			case "EXCHANGE": 
@@ -60,11 +59,6 @@ public class UI {
 				break;
 			case "HELP":
 				System.out.println("Inorder to Place on the board use the syntax: ABC-H8-Horizontal \n To Change letters in frame use Exchange-ABC. \n To end game write QUIT \n To pass round write PASS.");
-				controlWhatHappens = "help";
-				
-				break;
-			default:
-				controlWhatHappens = "placeonboard";
 				//splitInput[0] = b.
 				//split[1] is the axis
 				//split[2] is the word
