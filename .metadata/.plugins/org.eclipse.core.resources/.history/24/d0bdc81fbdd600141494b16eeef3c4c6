@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-
 /**
  * /*
  *  B’sWhyteFalcon
@@ -17,13 +14,12 @@ public class Scrabble {
 	
 
 
-	public static void main(String[] args) throws NullPointerException, RankOutOfBoundsException, VectorFullException, FileNotFoundException {
+	public static void main(String[] args) throws NullPointerException, RankOutOfBoundsException, VectorFullException {
 		
 		Board b = new Board();
 		b.populateBoard();
 		
 		UI ui = new UI();
-		Challenge challenge = new Challenge();
 		
 		Pool newPool = new Pool() ;
 		newPool.populateNewPool();
@@ -39,11 +35,7 @@ public class Scrabble {
 		boolean endGame = false;
 		
 		int incrementWhenPlaceOnBoard = 0;
-		boolean PLAYERONE = ui.controlGameFlow % 2 == 0;
-		
-		String theWord = "Ajrkfj";
-	    File theFile = new File("/home/ben/Scrabble - Git/Scrabble2/src/sowpods");
-		System.out.println(challenge.CheckWord(theWord, theFile));
+		final boolean PLAYERONE = ui.controlGameFlow % 2 == 0;
 		
 		
 		while(!endGame){

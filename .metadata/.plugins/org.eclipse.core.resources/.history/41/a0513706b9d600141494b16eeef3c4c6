@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-
 /**
  * /*
  *  B’sWhyteFalcon
@@ -17,13 +14,12 @@ public class Scrabble {
 	
 
 
-	public static void main(String[] args) throws NullPointerException, RankOutOfBoundsException, VectorFullException, FileNotFoundException {
+	public static void main(String[] args) throws NullPointerException, RankOutOfBoundsException, VectorFullException {
 		
 		Board b = new Board();
 		b.populateBoard();
 		
 		UI ui = new UI();
-		Challenge challenge = new Challenge();
 		
 		Pool newPool = new Pool() ;
 		newPool.populateNewPool();
@@ -39,11 +35,7 @@ public class Scrabble {
 		boolean endGame = false;
 		
 		int incrementWhenPlaceOnBoard = 0;
-		boolean PLAYERONE = ui.controlGameFlow % 2 == 0;
 		
-		String theWord = "Ajrkfj";
-	    File theFile = new File("/home/ben/Scrabble - Git/Scrabble2/src/sowpods");
-		System.out.println(challenge.CheckWord(theWord, theFile));
 		
 		
 		while(!endGame){
@@ -60,13 +52,12 @@ public class Scrabble {
 		//if((!splitInput[0].equalsIgnoreCase("exchange")) && (!splitInput[2].equalsIgnoreCase("horizontal")) && (!splitInput[2].equalsIgnoreCase("vertical"))){
 		//	System.out.println("This is not a valid input please try again.\n");
 		//}
-		
 		 if(splitInput[0].equals("exchange")) {	
 			
 			for(int i = 0; i < splitInput[1].length(); i++) {
 				    char ch = splitInput[1].charAt(i);				// takes in a letter from the user to be replaced in the frame
 					
-				    if(PLAYERONE)
+				    if(ui.controlGameFlow % 2 == 0)
 					{
 						playerOneFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerOneFrame.refillFrame(newPool);
@@ -83,7 +74,7 @@ public class Scrabble {
 			}
 		}
 		else if(check.equals("placeonboard")) {
-			if(PLAYERONE){
+			if(ui.controlGameFlow % 2 == 0){
 					if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
 						System.out.println("First Word Must be in centre.");
 					} 
@@ -120,17 +111,13 @@ public class Scrabble {
 					ui.controlGameFlow++;
 					incrementWhenPlaceOnBoard++;
 				}
-			} 
-			
-
-			switch(newPool.size()) {
-			
-				case 0:
-					endGame = true;
-					break;
-				default:
-					endGame = false;
-					break;	
+			}
+		
+			if(newPool.size() == 0){
+				endGame = true;
+			}
+			else{
+				endGame = false;
 			}
 
 		}
@@ -143,7 +130,5 @@ public class Scrabble {
 		}
 	}
 	}
-	
+
 }
-
-

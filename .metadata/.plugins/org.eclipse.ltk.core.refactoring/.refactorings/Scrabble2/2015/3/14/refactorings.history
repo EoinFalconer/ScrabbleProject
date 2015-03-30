@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;scanner&apos; from expression &apos;new Scanner(theFile)&apos;&#x0A;- Original project: &apos;Scrabble2&apos;&#x0A;- Variable name: &apos;scanner&apos;&#x0A;- Destination method: &apos;Challenge.CheckWord()&apos;&#x0A;- Variable expression: &apos;new Scanner(theFile)&apos;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;scanner&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;{Challenge.java" name="scanner" replace="true" selection="473 20" stamp="1427714067855" version="1.0"/>
+</session>
