@@ -105,7 +105,7 @@ public class Player implements PlayerInterface  {
 							temp.onSpecialSquare = b.getSquareScore(Integer.toString(tempLetter) + temp6);
 							tempLetter++;
 						}
-					//System.out.println("special Score: " + temp.onSpecialSquare);
+					System.out.println("special Score: " + temp.onSpecialSquare);
 					if(temp.onSpecialSquare.equalsIgnoreCase("dl")){
 						//System.out.println("double letter");
 						playerScore = playerScore + (temp.score * 2);

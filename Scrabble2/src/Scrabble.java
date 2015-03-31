@@ -21,7 +21,6 @@ public class Scrabble {
 		
 		Board b = new Board();
 		b.populateBoard();
-		
 		UI ui = new UI();
 		Challenge challenge = new Challenge();
 		
