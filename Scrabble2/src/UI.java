@@ -62,7 +62,6 @@ public class UI {
 			case "HELP":
 				System.out.println("Inorder to Place on the board use the syntax: ABC-H8-Horizontal \n To Change letters in frame use Exchange-ABC. \n To end game write QUIT \n To pass round write PASS.");
 				controlWhatHappens = "help";
-				
 				break;
 			default:
 				controlWhatHappens = "placeonboard";
