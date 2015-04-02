@@ -15,6 +15,7 @@ public class UI {
 	
 	Scanner in = new Scanner(System.in);
 	
+	
 	int controlGameFlow = 0;
 	
 	 

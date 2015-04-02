@@ -41,9 +41,9 @@ public class Scrabble {
 		int incrementWhenPlaceOnBoard = 0;
 		boolean PLAYERONE = ui.controlGameFlow % 2 == 0;
 		
-		String theWord = "Ajrkfj";
-	    File theFile = new File("/home/ben/Scrabble - Git/Scrabble2/src/sowpods");
-		System.out.println(challenge.CheckWord(theWord, theFile));
+			String theWord = "ABACAS";			//TESTING DICTIONARY FILE
+	    	File theFile = new File("/home/ben/Scrabble - Git/Scrabble2/src/sowpods");
+			System.out.println(challenge.CheckWord(theWord, theFile));
 		
 		
 		while(!endGame){
