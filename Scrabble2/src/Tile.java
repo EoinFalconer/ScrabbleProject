@@ -8,8 +8,8 @@
 
 
 public class Tile {
-	char tname;
-	int score;
+	char tname = ' '; 
+	int score = 0;
 	String onSpecialSquare;
 	public Tile(char c, int d){
 		tname = c;

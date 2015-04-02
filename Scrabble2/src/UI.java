@@ -15,7 +15,6 @@ public class UI {
 	
 	Scanner in = new Scanner(System.in);
 	
-	
 	int controlGameFlow = 0;
 	
 	 
@@ -35,6 +34,28 @@ public class UI {
 		 
 		 return prompt;
 	 } 
+	 public String promptWhenSpacePlayed(String enteredWord){
+		 System.out.println("Which letter would you like to use for your space character?");
+		 String temp = in.next();
+		 char tempChar = temp.charAt(0);
+		 String newEnteredWord = "";
+		 for(int i=0;i<enteredWord.length();i++){
+			 if(enteredWord.charAt(i) == ' '){
+				 newEnteredWord = newEnteredWord + tempChar;
+			 }
+			 else{
+				 newEnteredWord = newEnteredWord + enteredWord.charAt(i);
+			 }
+		 }
+		 
+		 return newEnteredWord;
+	 }
+	 public String promptChallenge(Player playerToBePrompted){
+		 String answer = "";
+		 System.out.println(playerToBePrompted.playerid + " would you like to challenge the word");
+		 answer = in.next();
+		 return answer;
+	 }
 	 public void resetTurn(){
 		 controlGameFlow--;
 	 }
@@ -62,6 +83,7 @@ public class UI {
 			case "HELP":
 				System.out.println("Inorder to Place on the board use the syntax: ABC-H8-Horizontal \n To Change letters in frame use Exchange-ABC. \n To end game write QUIT \n To pass round write PASS.");
 				controlWhatHappens = "help";
+				
 				break;
 			default:
 				controlWhatHappens = "placeonboard";
@@ -82,8 +104,14 @@ public class UI {
 	 }
 	 
 	 public String takeGenericInput(){
+		 while(in.hasNext())
+			    in.next();
 		 System.out.println("What would you like to do?");
-		 String inputString = in.next();
+		 String inputString = "";
+		
+			 inputString = in.nextLine();
+	 	
+		  
 		 return inputString;
 	 }
 	 

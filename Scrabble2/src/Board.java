@@ -48,6 +48,9 @@ public class Board {
             } 
             }
     }
+    public Square squareAtCoordinates(int i, int j){
+    	return boardArray[i][j];
+    }
     public Boolean isEmpty(){
     	boolean flag = true;
     	for(int i=0;i<15;i++){
@@ -375,6 +378,31 @@ public class Board {
 			    		return false;
 			    	}
 			    }
+    public void removeWordFromBoard(String startingCoordinate, String word, String axis){
+    	int iCoordinate = 0;
+    	int jCoordinate = 0;
+    	for(int i=0;i<15;i++){
+    		for(int j=0;j<15;j++){
+    			if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
+    				iCoordinate = i;
+    				jCoordinate = j;
+    			}
+    		}
+    	}
+    	if(axis.equalsIgnoreCase("horizontal"))
+    	for(int i=0;i<word.length();i++){
+    		boardArray[iCoordinate][jCoordinate].tileInSquareScore = 0;
+    		boardArray[iCoordinate][jCoordinate].tileInSquareValue = ' ';
+    		jCoordinate++;
+    	}
+    	else{
+    		for(int i=0;i<word.length();i++){
+        		boardArray[iCoordinate][jCoordinate].tileInSquareScore = 0;
+        		boardArray[iCoordinate][jCoordinate].tileInSquareValue = ' ';
+        		iCoordinate++;
+        	}
+    	}
+    }
     
     public void displayBoard() throws NullPointerException {
     System.out.println("    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15\n");

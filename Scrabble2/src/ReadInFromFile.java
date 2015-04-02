@@ -23,7 +23,6 @@ public class ReadInFromFile {
 	
     public void copyFile(String sourceFileName, String sourceNumFile) 
     	{ 
-			 
 			 URL lettersURL = null;
 			 URL numbersURL = null;
 					try 

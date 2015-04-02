@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import javax.print.DocFlavor.URL;
 
 /**
  * /*
@@ -21,6 +24,7 @@ public class Scrabble {
 		
 		Board b = new Board();
 		b.populateBoard();
+		
 		UI ui = new UI();
 		Challenge challenge = new Challenge();
 		
@@ -38,12 +42,9 @@ public class Scrabble {
 		boolean endGame = false;
 		
 		int incrementWhenPlaceOnBoard = 0;
-		boolean PLAYERONE = ui.controlGameFlow % 2 == 0;
 		
-			String theWord = "ABACAS";			//TESTING DICTIONARY FILE
-	    	File theFile = new File("/home/ben/Scrabble - Git/Scrabble2/src/sowpods");
-			System.out.println(challenge.CheckWord(theWord, theFile));
-		
+		 File theFile = new File("src/sowpods"); 
+		 
 		
 		while(!endGame){
 		System.out.println(ui.displayScoreNameAndFrame(p.playerid, p.getScore(), playerOneFrame.displayFrame()));
@@ -52,20 +53,22 @@ public class Scrabble {
 		b.displayBoard();
 			System.out.println("\n" + ui.promptPlayer(p, p2)); 
 		
-		String splitInput[] = new String[10];
+	
 		String genericInputString = ui.takeGenericInput();
-		splitInput = genericInputString.split("-");
+		System.out.println("Generic Input:" + genericInputString);
+		String splitInput[] = genericInputString.split(" ");
+		for(int i=0; i< splitInput.length; i++) {
+			System.out.println(splitInput[i].trim());
+		} 
 		String check = ui.checkInput(genericInputString);
-		//if((!splitInput[0].equalsIgnoreCase("exchange")) && (!splitInput[2].equalsIgnoreCase("horizontal")) && (!splitInput[2].equalsIgnoreCase("vertical"))){
-		//	System.out.println("This is not a valid input please try again.\n");
-		//}
+		
 		
 		 if(splitInput[0].equals("exchange")) {	
 			
 			for(int i = 0; i < splitInput[1].length(); i++) {
 				    char ch = splitInput[1].charAt(i);				// takes in a letter from the user to be replaced in the frame
 					
-				    if(PLAYERONE)
+				    if(ui.controlGameFlow % 2 == 0)
 					{
 						playerOneFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerOneFrame.refillFrame(newPool);
@@ -76,13 +79,12 @@ public class Scrabble {
 				    	playerTwoFrame.moveTileToPool(ch, newPool);		// puts chosen letter back into the pool
 						playerTwoFrame.refillFrame(newPool);
 						ui.controlGameFlow++;
-					
 				    }
 				    
 			}
 		}
 		else if(check.equals("placeonboard")) {
-			if(PLAYERONE){
+			if(ui.controlGameFlow % 2 == 0){
 					if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
 						System.out.println("First Word Must be in centre.");
 					} 
@@ -94,31 +96,95 @@ public class Scrabble {
 					System.out.println("This word is not legal");
 					
 					}
+					
 					else{
+						
+						splitInput[0].trim();
+						if(splitInput[0].contains(" ")){
+							splitInput[0] = ui.promptWhenSpacePlayed(splitInput[0]);
+						}
+						int initialTurnScore = p.getScore();
 						b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerOneFrame);
 						p.addWordToScore(splitInput[0], playerOneFrame, splitInput[1],splitInput[2],b);
+						int endTurnScore = p.getScore();
 						playerOneFrame.refillFrame(newPool);
+						b.displayBoard();
+						String isChallenging = ui.promptChallenge(p2);
+						int scoreDifference = endTurnScore - initialTurnScore;
+						if(isChallenging.equalsIgnoreCase("yes")){
+							boolean flag = challenge.CheckWord(splitInput[0], theFile);
+							if(flag){
+								System.out.println("Word is ok, " + p2.playerid + " you have lost a turn");
+								incrementWhenPlaceOnBoard++;
+							}
+							else if(!flag){
+								System.out.println("Word is not in scrabble dictionary, " + p.playerid + " you have lost a turn");
+								p.playerScore = p.getScore() - scoreDifference;
+								b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
+								ui.controlGameFlow++;
+							}
+						}
+						else if(isChallenging.equalsIgnoreCase("no")){
+							ui.controlGameFlow++;
+							incrementWhenPlaceOnBoard++;
+						}
+						else{
+							System.out.println("This is not a valid input, the word will be placed.");
+							ui.controlGameFlow++;
+							incrementWhenPlaceOnBoard++;
+						}
+					}
+				}
+			if(ui.controlGameFlow % 2 == 0){
+				if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
+					System.out.println("First Word Must be in centre.");
+				} 
+				else if(!b.isPlacedInBoard(splitInput[0], splitInput[1], splitInput[2])){	//chooseword, position, axis
+				System.out.println("This is out of bounds");
+				
+				}
+				else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard != 0)  ){
+				System.out.println("This word is not legal");
+				
+				}
+				
+				else{
+					splitInput[0].trim();
+					if(splitInput[0].contains(" ")){
+						splitInput[0] = ui.promptWhenSpacePlayed(splitInput[0]);
+					}
+					int initialTurnScore = p.getScore();
+					b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerOneFrame);
+					p.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
+					int endTurnScore = p.getScore();
+					playerOneFrame.refillFrame(newPool);
+					b.displayBoard();
+					String isChallenging = ui.promptChallenge(p);
+					int scoreDifference = endTurnScore - initialTurnScore;
+					if(isChallenging.equalsIgnoreCase("yes")){
+						boolean flag = challenge.CheckWord(splitInput[0], theFile);
+						if(flag){
+							System.out.println("Word is ok, " + p.playerid + " you have lost a turn");
+							incrementWhenPlaceOnBoard++;
+						}
+						else{
+							System.out.println("Word is not in scrabble dictionary, " + p2.playerid + " you have lost a turn");
+							p.playerScore = p.getScore() - scoreDifference;
+							b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
+							ui.controlGameFlow++;
+						}
+					}
+					else if(isChallenging.equalsIgnoreCase("no")){
+						ui.controlGameFlow++;
+						incrementWhenPlaceOnBoard++;
+					}
+					else{
+						System.out.println("This is not a valid input, the word will be placed.");
 						ui.controlGameFlow++;
 						incrementWhenPlaceOnBoard++;
 					}
 				}
-			else{
-				if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
-					System.out.println("First word needs to be placed threw H8");
-				}
-				else if(!b.isPlacedInBoard(splitInput[0], splitInput[1], splitInput[2])){
-					System.out.println("This is out of bounds - you must place in boundry of the board.");
-				}
-				else if(!b.checkWordIsLegal(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard != 0) ){
-					System.out.println("This word is not legal");
-				}
-				else{
-					b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerTwoFrame);
-					p2.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
-					playerTwoFrame.refillFrame(newPool);
-					ui.controlGameFlow++;
-					incrementWhenPlaceOnBoard++;
-				}
+			}
 			} 
 			
 
@@ -143,6 +209,5 @@ public class Scrabble {
 	}
 	}
 	
-}
 
 

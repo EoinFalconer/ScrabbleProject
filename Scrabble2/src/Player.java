@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 
 public class Player implements PlayerInterface  {
-	private int playerScore;
+	int playerScore;
 	String playerid;
 	
 		public Player(String pname) {	
@@ -74,67 +74,72 @@ public class Player implements PlayerInterface  {
 			}
 	}
 	public void addWordToScore(String enteredWord, Frame f, String startingCoordinate, String axis, Board b) throws RankOutOfBoundsException, NullPointerException{
-		Tile temp = null;
+		Tile foundTile = null;
 		boolean isDword = false;
 		boolean isTword = false;
 		int immediateScore = 0;
-		int tempLetter = Integer.valueOf(startingCoordinate.charAt(0));
-		String temp6 = String.valueOf(startingCoordinate.charAt(1));
-		int k=0;
 		
+		
+		
+		int startingCoordinatei = 0;
+		int startingCoordinatej = 0;
+		
+		for(int i=0;i<15;i++){
+			for(int j=0;j<15;j++){
+				if(b.squareAtCoordinates(i, j).squareName.equalsIgnoreCase(startingCoordinate)){
+					startingCoordinatei = i;
+					startingCoordinatej = j;						//Initialise the starting coordinate which will be looped through
+				}
+			}
+		}
 		for(int i=0;i<enteredWord.length();i++){
 			
 			enteredWord = enteredWord.toUpperCase();
-			char letterKey = enteredWord.charAt(i);
-			
+			char letterKey = enteredWord.charAt(i); 		//The first letter will be the thing we're looking for in the frame.
 			for(int j=0;j<f.frameSize();j++){
-					temp = f.getTileRank(j);
-				char tileName = ' ';
-				if(temp != null){
-					tileName = temp.tname;
+				Tile temp = f.getTileRank(j);//loop through the frame looking for that tile which has the letter from above.
+				if(temp!=null){
+				if(letterKey == temp.tname){ //yes, so then we have the stile from the frame which we want to use
+					foundTile = temp;
 				
 				
-				
-				if(tileName == letterKey){
 					if(axis.equalsIgnoreCase("horizontal")){
-						temp.onSpecialSquare = (b.getSquareScore(startingCoordinate.charAt(0) + Integer.toString(k)));
-						k++;
+						foundTile.onSpecialSquare = b.squareAtCoordinates(startingCoordinatei,startingCoordinatej).squareScore;
+						startingCoordinatei++;
 					}
 					else{
-							//System.out.println(Integer.toString(tempLetter) + temp6);
-							temp.onSpecialSquare = b.getSquareScore(Integer.toString(tempLetter) + temp6);
-							tempLetter++;
+							foundTile.onSpecialSquare = b.squareAtCoordinates(startingCoordinatei,startingCoordinatej).squareScore;
+							startingCoordinatej++;
 						}
-					System.out.println("special Score: " + temp.onSpecialSquare);
-					if(temp.onSpecialSquare.equalsIgnoreCase("dl")){
-						//System.out.println("double letter");
-						playerScore = playerScore + (temp.score * 2);
-						immediateScore = immediateScore + (temp.score *2);
+					System.out.println("special Score: " + foundTile.onSpecialSquare);
+					if(foundTile.onSpecialSquare.equalsIgnoreCase("dl")){
+						playerScore = playerScore + (foundTile.score * 2);
+						immediateScore = immediateScore + (foundTile.score *2);
 					}
-					else if(temp.onSpecialSquare.equalsIgnoreCase("tl")){
-						playerScore = playerScore + (temp.score * 3);
-						immediateScore = immediateScore + (temp.score *3);
+					else if(foundTile.onSpecialSquare.equalsIgnoreCase("tl")){
+						playerScore = playerScore + (foundTile.score * 3);
+						immediateScore = immediateScore + (foundTile.score *3);
 					}
-					else if(temp.onSpecialSquare.equalsIgnoreCase("dw")){
-						immediateScore = immediateScore + temp.score;
-						playerScore = playerScore + temp.score;
+					else if(foundTile.onSpecialSquare.equalsIgnoreCase("dw")){
+						immediateScore = immediateScore + foundTile.score;
+						playerScore = playerScore + foundTile.score;
 						isDword = true;
 					}
 					else if(temp.onSpecialSquare.equalsIgnoreCase("tw")){
-						immediateScore = immediateScore + temp.score;
-						playerScore = playerScore + temp.score;
+						immediateScore = immediateScore + foundTile.score;
+						playerScore = playerScore + foundTile.score;
 						isTword = true;
 					}
 					else{
-						immediateScore = immediateScore + temp.score;
-						playerScore = playerScore + temp.score;
+						immediateScore = immediateScore + foundTile.score;
+						playerScore = playerScore + foundTile.score;
 					}
 					f.removeFromFrame(letterKey);
 				}
-					
 				}
+				} 
 			}	
-		}
+		
 		if(isDword){
 			playerScore = playerScore - immediateScore;
 			playerScore = playerScore + (immediateScore*2);
