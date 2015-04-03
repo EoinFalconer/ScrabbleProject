@@ -11,12 +11,18 @@
 
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 
 public class Board {
+	
+	File theFile = new File("src/sowpods");
 	
 	private final int HORIZONTAL_INDEX=15;
     private final int VERTICAL_INDEX=15;
@@ -884,4 +890,66 @@ public class Board {
 	
 		return flag ; 
     }
+    
+    public boolean checkAllWordsOnBoard() throws FileNotFoundException, NoSuchElementException{
+    	Scanner scanner = new Scanner(theFile);
+    	boolean flag1 = false;
+    	boolean flag2 = false;
+    	boolean mainFlag = true;
+    	String theWord="";
+    	
+    	for(int i=0;i<15;i++){	// Vertical
+    		for(int j=0;j<15;j++){
+    			if(mainFlag == true) {
+	    			if(boardArray[i][j].tileInSquareValue == ' ') {
+	    				continue;
+	    			}
+	    			else if(boardArray[i][j].tileInSquareValue != ' ') {
+	    				theWord = theWord + boardArray[i][j].tileInSquareValue;
+	    					if(boardArray[i][j+1].tileInSquareValue == ' ') {
+	    						flag1 = true;
+	    					}
+	    						if(flag1 == true && (theWord.length() > 1)) {
+	    		    				System.out.println(theWord);
+	    							mainFlag = (scanner.useDelimiter("\\Z").next()).contains(theWord);
+	    							theWord="";
+	    						}
+	    						
+	    						else if(flag1 == true && (theWord.length() <= 1)) {
+	    							theWord ="";
+	    						}
+	    				}
+    			}
+    		}
+    	}
+    	
+    	for(int j=0;j<15;j++){	// Vertical
+    		for(int i=0;i<15;i++){
+    			if(mainFlag == true) {
+    			theWord ="";
+    			if(boardArray[i][j].tileInSquareValue == ' ') {
+    				continue;
+    			}
+    			else if(boardArray[i][j].tileInSquareValue != ' ') {
+    				theWord = theWord + boardArray[i][j].tileInSquareValue;
+    				
+    					if(boardArray[i+1][j].tileInSquareValue == ' ') {
+    						flag2 = true;
+    					}
+	    					if(flag2 == true && (theWord.length() > 1)) {
+			    				System.out.println(theWord);
+								mainFlag = (scanner.useDelimiter("\\Z").next()).contains(theWord);
+								theWord="";
+							}
+							
+							else if(flag2 == true && (theWord.length() <= 1)) {
+								theWord ="";
+							}
+    				}
+    			}
+    		}
+    	}
+    	return mainFlag;
+    }
 }
+

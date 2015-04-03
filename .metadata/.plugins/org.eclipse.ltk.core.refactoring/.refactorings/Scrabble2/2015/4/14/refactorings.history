@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;UI.getName()&apos; to &apos;setName&apos;&#x0A;- Original project: &apos;Scrabble2&apos;&#x0A;- Original element: &apos;UI.getName()&apos;&#x0A;- Renamed element: &apos;UI.setName()&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getName&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{UI.java[UI~getName" name="setName" references="true" stamp="1428081102048" version="1.0"/>
+</session>
