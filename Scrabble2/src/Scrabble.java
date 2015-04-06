@@ -26,7 +26,6 @@ public class Scrabble {
 			b.populateBoard();
 		
 				UI ui = new UI();
-				Challenge challenge = new Challenge();
 		
 						Pool newPool = new Pool();
 						newPool.populateNewPool();	
@@ -48,8 +47,10 @@ public class Scrabble {
 				int initialTurnScore;
 				int endTurnScore;
 				int scoreDifference;
+				String acceptedWords = "";
 				
 		
+					@SuppressWarnings("unused")
 					File theFile = new File("src/sowpods"); // dictionary File.
 		 
 // End Part One
@@ -101,6 +102,7 @@ public class Scrabble {
 // End Part Three
 		 
 // Part Four: Place On Board
+		 
 		else if(check.equals("placeonboard")) {
 			if(ui.InputValidationWhilePlacing(splitInput[0], splitInput[1], splitInput[2]) == true) {
 		
@@ -142,24 +144,27 @@ public class Scrabble {
 													
 // CHALLENGE															
 														if(isChallenging.equalsIgnoreCase("yes")){
-															boolean flag = b.checkAllWordsOnBoard(); 
-																if(flag){
-																	System.out.println("Word is ok, " + p2.playerid + " you have lost a turn");
-																		incrementWhenPlaceOnBoard++;
-																}
-																else if(!flag){
-																	System.out.println("Word is not in scrabble dictionary, " + p.playerid + " you have lost a turn");
-																		p.playerScore = p.getScore() - scoreDifference;
-																			b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
-																				ui.controlGameFlow++;
-																}
+															boolean flag = b.checkAllWordsOnBoard(acceptedWords);
+															if(flag){
+																System.out.println("Word is ok, " + p2.playerid + " you have lost a turn");
+																acceptedWords = acceptedWords + splitInput[0];
+																	incrementWhenPlaceOnBoard++;
+															}
+															else if(!flag){
+																System.out.println("Word is not in scrabble dictionary, " + p.playerid + " you have lost a turn");
+																	p.playerScore = p.getScore() - scoreDifference;
+																		b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
+																			ui.controlGameFlow++;
+															}
 														}
 														else if(isChallenging.equalsIgnoreCase("no")){
 															ui.controlGameFlow++;
+															acceptedWords = acceptedWords + splitInput[0];
 																incrementWhenPlaceOnBoard++;
 														}
 														else{
 															System.out.println("This is not a valid input, the word will be placed.");
+																acceptedWords = acceptedWords + splitInput[0];
 																ui.controlGameFlow++;
 																	incrementWhenPlaceOnBoard++;
 														}
@@ -183,38 +188,41 @@ public class Scrabble {
 															splitInput[0] = ui.promptWhenSpacePlayed(splitInput[0]);
 														}
 														
-													initialTurnScore = p.getScore();
+													initialTurnScore = p2.getScore();
 														b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerTwoFrame);
-															p.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
+															p2.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
 															
-													endTurnScore = p.getScore();
+													endTurnScore = p2.getScore();
 														playerTwoFrame.refillFrame(newPool);
 															b.displayBoard();
 																String isChallenging = ui.promptChallenge(p);
 																
 													scoreDifference = endTurnScore - initialTurnScore;
 															if(isChallenging.equalsIgnoreCase("yes")){
-																	boolean flag = b.checkAllWordsOnBoard();
-																		if(flag){
-																			System.out.println("Word is ok, " + p.playerid + " you have lost a turn");
-																				incrementWhenPlaceOnBoard++;
-																		}
-																		else{
-																			System.out.println("Word is not in scrabble dictionary, " + p2.playerid + " you have lost a turn");
-																				p.playerScore = p.getScore() - scoreDifference;
-																					b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
-																						ui.controlGameFlow++;
-																		}
-															}
-															else if(isChallenging.equalsIgnoreCase("no")){
-																ui.controlGameFlow++;
-																	incrementWhenPlaceOnBoard++;
-															}
-															else{
-																System.out.println("This is not a valid input, the word will be placed.");
-																	ui.controlGameFlow++;
+																boolean flag = b.checkAllWordsOnBoard(acceptedWords);
+																if(flag){
+																	System.out.println("Word is ok, " + p.playerid + " you have lost a turn");
+																		acceptedWords = acceptedWords + splitInput[0];
 																		incrementWhenPlaceOnBoard++;
-															}
+																}
+																else{
+																	System.out.println("Word is not in scrabble dictionary, " + p2.playerid + " you have lost a turn");
+																		p2.playerScore = p2.getScore() - scoreDifference;
+																			b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
+																				ui.controlGameFlow++;
+																}
+													}
+													else if(isChallenging.equalsIgnoreCase("no")){
+														acceptedWords = acceptedWords + splitInput[0];
+														ui.controlGameFlow++;
+															incrementWhenPlaceOnBoard++;
+													}
+													else{
+														System.out.println("This is not a valid input, the word will be placed.");
+															acceptedWords = acceptedWords + splitInput[0];
+															ui.controlGameFlow++;
+																incrementWhenPlaceOnBoard++;
+													}
 												}
 							}
 				}

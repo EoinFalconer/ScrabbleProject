@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /*
  *  B’sWhyteFalcon
  *	Assignment  1
@@ -12,7 +14,7 @@
 
 public class FrameTest {
 
-	public static void main(String args[]) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException {
+	public static void main(String args[]) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException, FileNotFoundException {
 		
 		
 		

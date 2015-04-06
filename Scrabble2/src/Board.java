@@ -12,10 +12,10 @@
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -83,18 +83,14 @@ public class Board {
     	}
     }
     
-    public void populateBoard() throws NullPointerException {
+    public void populateBoard() throws NullPointerException, FileNotFoundException {
     	 BufferedReader b1 = null;
     	 
-    	 URL BoardURL = null;
-				try {
-					BoardURL = new URL("http://breynolds.netsoc.com/boardtxt.txt");
-				} 
-				catch (MalformedURLException e1) {
-					e1.printStackTrace();
-				}
+					File BoardURL = new File("src/boardtxt.txt");
+					InputStream is = new FileInputStream(BoardURL);
+					InputStreamReader  isr = new InputStreamReader(is);
 		 try{
-			 b1 = new BufferedReader(new InputStreamReader(BoardURL.openStream()));
+			 b1 = new BufferedReader(isr);
 			 
 			 String line;
 			 int i = 0;
@@ -891,65 +887,68 @@ public class Board {
 		return flag ; 
     }
     
-    public boolean checkAllWordsOnBoard() throws FileNotFoundException, NoSuchElementException{
+    public boolean checkAllWordsOnBoard(String acceptedWords) throws FileNotFoundException, NoSuchElementException{
     	Scanner scanner = new Scanner(theFile);
-    	boolean flag1 = false;
-    	boolean flag2 = false;
-    	boolean mainFlag = true;
-    	String theWord="";
+    	boolean flag1 = true;
+    	boolean flag2 = true;
+    	String exceptionSquares = "";
+    	String wordInQuestion="";
     	
-    	for(int i=0;i<15;i++){	// Vertical
+    	for(int i=0;i<15;i++){
+    		 exceptionSquares = "";
     		for(int j=0;j<15;j++){
-    			if(mainFlag == true) {
-	    			if(boardArray[i][j].tileInSquareValue == ' ') {
-	    				continue;
-	    			}
-	    			else if(boardArray[i][j].tileInSquareValue != ' ') {
-	    				theWord = theWord + boardArray[i][j].tileInSquareValue;
-	    					if(boardArray[i][j+1].tileInSquareValue == ' ') {
-	    						flag1 = true;
-	    					}
-	    						if(flag1 == true && (theWord.length() > 1)) {
-	    		    				System.out.println(theWord);
-	    							mainFlag = (scanner.useDelimiter("\\Z").next()).contains(theWord);
-	    							theWord="";
-	    						}
-	    						
-	    						else if(flag1 == true && (theWord.length() <= 1)) {
-	    							theWord ="";
-	    						}
-	    				}
-    			}
-    		}
-    	}
-    	
-    	for(int j=0;j<15;j++){	// Vertical
-    		for(int i=0;i<15;i++){
-    			if(mainFlag == true) {
-    			theWord ="";
-    			if(boardArray[i][j].tileInSquareValue == ' ') {
-    				continue;
-    			}
-    			else if(boardArray[i][j].tileInSquareValue != ' ') {
-    				theWord = theWord + boardArray[i][j].tileInSquareValue;
-    				
-    					if(boardArray[i+1][j].tileInSquareValue == ' ') {
-    						flag2 = true;
-    					}
-	    					if(flag2 == true && (theWord.length() > 1)) {
-			    				System.out.println(theWord);
-								mainFlag = (scanner.useDelimiter("\\Z").next()).contains(theWord);
-								theWord="";
-							}
-							
-							else if(flag2 == true && (theWord.length() <= 1)) {
-								theWord ="";
-							}
+    			if((boardArray[i][j].tileInSquareValue != ' ') && (!exceptionSquares.contains(boardArray[i][j].squareName))){
+    					wordInQuestion="";
+    				while(boardArray[i][j].tileInSquareValue !=' '){
+    					wordInQuestion = wordInQuestion + boardArray[i][j].tileInSquareValue;
+    					exceptionSquares = exceptionSquares + boardArray[i][j].squareName;
+    					j++;
     				}
+    				//System.out.println("WordinquestionHorizontal: " + wordInQuestion +"\nExceptionSquaresHorizontal: " + exceptionSquares);
+    				if(wordInQuestion.length() > 1){
+    					if(scanner.hasNext()) {
+    						
+							flag1 = (((scanner.useDelimiter("\\Z").next()).contains(wordInQuestion+'\n')) || (acceptedWords.contains(wordInQuestion)));
+							System.out.println(flag1);
+							System.out.println("horizontal: " + wordInQuestion);
+
+    					}
+						if(!flag1){
+							break;
+						}
+					}
     			}
     		}
     	}
-    	return mainFlag;
+    	scanner.close();
+    	Scanner scanner1 = new Scanner(theFile);
+    	for(int j=0;j<15;j++){	
+    		 exceptionSquares = "";
+    		for(int i=0;i<15;i++){
+    			if((boardArray[i][j].tileInSquareValue != ' ')&&(!exceptionSquares.contains(boardArray[i][j].squareName))){
+    					wordInQuestion = "";
+    				while(boardArray[i][j].tileInSquareValue != ' '){
+    					wordInQuestion = wordInQuestion + boardArray[i][j].tileInSquareValue;
+    					exceptionSquares = exceptionSquares + boardArray[i][j].squareName;
+    					i++;
+    				}
+    				//System.out.println("WordinquestionVertical: " + wordInQuestion +"\nExceptionSquaresVertical: " + exceptionSquares);
+    					if(wordInQuestion.length() > 1){
+    						if(scanner1.hasNext()) {
+    							System.out.println("vertical: " + wordInQuestion);
+    							flag2 = ((scanner1.useDelimiter("\\Z").next()).contains(wordInQuestion+'\n')|| (acceptedWords.contains(wordInQuestion)));
+    							System.out.println(flag2);
+    						}
+    						if(!flag2){
+    							break;
+    						}
+    					}
+    			}
+    		}
+    		
+    	}
+    	scanner1.close();
+    	return (flag1 && flag2);
     }
 }
 

@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /*
  *  B’sWhyteFalcon
  *	Assignment  1
@@ -15,6 +17,6 @@ public interface PoolInterface {
     public Tile frameToPool(int rank, Tile element) throws RankOutOfBoundsException;
     public void insertAtRandom(Tile element) throws RankOutOfBoundsException, VectorFullException;
 	public Tile removeTileAtRankFromPool(int rank) throws RankOutOfBoundsException;
-	public void populateNewPool() throws RankOutOfBoundsException, VectorFullException;
+	public void populateNewPool() throws RankOutOfBoundsException, VectorFullException, FileNotFoundException;
 		
 }

@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /*
  * B’sWhyteFalcon
  *	Assignment  1
@@ -7,7 +9,7 @@
  */
 public class PlayerTest {
 
-	public static void main(String[] args) throws RankOutOfBoundsException, VectorFullException {
+	public static void main(String[] args) throws RankOutOfBoundsException, VectorFullException, FileNotFoundException {
 		
 		Pool newPool = new Pool() ;   				//creates a pool object
 		newPool.populateNewPool();			  				// creates a new pool

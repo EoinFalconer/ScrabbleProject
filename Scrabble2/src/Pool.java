@@ -7,6 +7,7 @@
  */
 
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Stack;
 
@@ -117,10 +118,10 @@ public class Pool implements PoolInterface{
 					 * all 100 elements which are needed.
 					 */
 	
-						public void populateNewPool() throws RankOutOfBoundsException, VectorFullException{
+						public void populateNewPool() throws RankOutOfBoundsException, VectorFullException, FileNotFoundException{
 							
 							ReadInFromFile newpool = new ReadInFromFile(); //this makes a readinfromfile object
-								newpool.copyFile("/Users/EoinFalconer/Documents/College/Stage 2/Semester One/Software Engineering Project/Scrabble/src/ConorPool/ConorPool/src/abc.txt","/Users/EoinFalconer/Documents/College/Stage 2/Semester One/Software Engineering Project/Scrabble/src/ConorPool/ConorPool/src/123.txt");
+								newpool.copyFile("src/abc.txt","src/123.txt");
 							
 								//runs all the randomising stuff in the readinfromfile class
 								Stack<Character> Stack1 = newpool.getStack1(); 		//gets the stack from readinfromfile using getstack1 method
@@ -143,7 +144,7 @@ public class Pool implements PoolInterface{
 								
 							}
 						
-				public void	resetPool() throws RankOutOfBoundsException, VectorFullException {
+				public void	resetPool() throws RankOutOfBoundsException, VectorFullException, FileNotFoundException {
 								
 							for(int i=0; tileAtRank(i) != null; i++)
 						  	{

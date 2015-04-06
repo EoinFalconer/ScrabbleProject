@@ -10,8 +10,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
-import java.net.*;
 import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class ReadInFromFile {
 	
@@ -21,20 +22,17 @@ public class ReadInFromFile {
     private char[] arrayOfLetters = new char[500] ; 
     private int[] arrayOfTileValues = new int[500] ;
 	
-    public void copyFile(String sourceFileName, String sourceNumFile) 
-    	{ 
-			 URL lettersURL = null;
-			 URL numbersURL = null;
-					try 
-					{
-						lettersURL = new URL("http://breynolds.netsoc.com/abc.txt");
-						numbersURL = new URL("http://breynolds.netsoc.com/123.txt");
-					} 
-					catch (MalformedURLException e1) 
-					{
-						e1.printStackTrace();
-					}
-			  
+    public void copyFile(String sourceFileName, String sourceNumFile)  throws FileNotFoundException
+    	{
+					
+						File lettersURL = new File("src/abc.txt");
+						File numbersURL = new File("src/123.txt");
+					
+						InputStream is = new FileInputStream(lettersURL);
+				        InputStream is1 = new FileInputStream(numbersURL);
+				         // create new input stream reader
+				      InputStreamReader  isr = new InputStreamReader(is);
+				      InputStreamReader isr1 = new InputStreamReader(is1);
 			 /*
 			  * Creating the bufferedreader and the reading in
 			  * the characters and the integers. 
@@ -44,8 +42,8 @@ public class ReadInFromFile {
 		      try 
 		      {
 		          
-		    	  br = new BufferedReader(new InputStreamReader(lettersURL.openStream()));
-		          b2 = new BufferedReader(new InputStreamReader( numbersURL.openStream() ));
+		    	  br = new BufferedReader(isr);
+		          b2 = new BufferedReader(isr1);
 		          
 		    	  
 		          String line;
