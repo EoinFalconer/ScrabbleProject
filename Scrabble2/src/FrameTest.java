@@ -50,8 +50,23 @@ public class FrameTest {
 				System.out.println("Frame Player Two:" + s1);
 				// end of printing frame
 		
-				char ch1 = s1.charAt(1);
-				fr.moveTileToPool(ch1, newPool);
+				char ch1 = s1.charAt(1);				//tests for fixing the remove from frame
+				char ch2 = s1.charAt(2);
+				char ch3 = s1.charAt(3);
+				char ch4 = s1.charAt(4);
+				char ch5 = s1.charAt(5);
+				char ch6 = s1.charAt(6);
+				char ch7 = s1.charAt(7);
+				fr.removeFromFrame(ch1);
+				fr.removeFromFrame(ch2);
+				fr.removeFromFrame(ch3);
+				fr.removeFromFrame(ch4);
+				fr.removeFromFrame(ch5);
+				fr.removeFromFrame(ch6);
+				fr.removeFromFrame(ch7);
+				
+				
+				
 				fr.refillFrame(newPool);
 				System.out.println("Augmented Frame Player Two:" + fr.displayFrame() );	
 				  
