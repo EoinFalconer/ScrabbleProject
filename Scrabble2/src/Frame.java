@@ -201,6 +201,11 @@ public class Frame implements FrameInterface {
 		    			}
 		    			else if(cUpper == arrayOfTiles[i].tname) {
 				    		arrayOfTiles[i] = e;
+				    		for(int k=i;k<(numberOfElements-1);k++){
+				    				arrayOfTiles[k] = arrayOfTiles[k+1];
+				    				
+				    		}
+				    		arrayOfTiles[numberOfElements-1] = null;
 				    		numberOfElements--;
 				    		break;
 		    			}

@@ -65,8 +65,6 @@ public class FrameTest {
 				fr.removeFromFrame(ch6);
 				fr.removeFromFrame(ch7);
 				
-				
-				
 				fr.refillFrame(newPool);
 				System.out.println("Augmented Frame Player Two:" + fr.displayFrame() );	
 				  
