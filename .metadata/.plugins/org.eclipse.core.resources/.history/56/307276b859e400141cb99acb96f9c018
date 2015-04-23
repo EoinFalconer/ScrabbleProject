@@ -1,0 +1,134 @@
+import java.util.Arrays;
+
+
+public class Bot {
+
+	private Word word = new Word();
+	private String letters;
+	
+	Bot () {
+		word.setWord(0, 0, Word.HORIZONTAL, "HELLO");
+		letters = "XYZ";
+	}
+	
+	public String getCommand (Player player, Board board, Frame frame, int incrementWhenPlacedOnBoard) {
+		String[] AcceptedWords = new String[200];
+		Tile[] tileArray = frame.returnArrayOfTiles();
+		char[] arrayOfCharactersInFrame = new char[7];
+		String[] arrayOfCombinations = new String[100000];
+		int[] exceptions = {-1, 0, 1, 2, 3, 4, 5, 6, 7}; //get every combination of size X = {1,2,3,4,5,6,7}, then store each of these an array and loop through each one.
+		String wordToBePlaced = null;
+		
+		for(int i=0;tileArray[i] != null;i++){
+			arrayOfCharactersInFrame[i] = tileArray[i].tname;
+		}
+		Integer[] arrayOfCharactersInFrameCasted = new Integer[arrayOfCharactersInFrame.length];		//converting the characters to integers
+		for(int i=0;i<arrayOfCharactersInFrame.length;i++){
+			arrayOfCharactersInFrameCasted[i] = Character.getNumericValue(arrayOfCharactersInFrame[i]); //changing to integers
+		}
+		
+		/*
+		 * All combinations of words being gotten here
+		 */
+		
+		 Permutations<Integer> perm = new Permutations<Integer>(arrayOfCharactersInFrameCasted);
+		 int count = 0;
+		 while(perm.hasNext()){
+		        arrayOfCombinations[count] = Arrays.toString(perm.next());
+		        count++;
+		    }
+		//get every combination of these letters and load into arrayOfCombinations
+		 /*
+		  * We need to place the first word.
+		  */
+		 if(incrementWhenPlacedOnBoard == 0){
+			 for(i=0;i<arrayOfCombinations.length){
+				 
+			 }
+		 }
+		
+		/*
+		 * VERTICAL PLACING CHECK
+		 */
+		 int acceptedWordsCount = 0;
+		for(int k=0;k<arrayOfCombinations.length;k++){
+			for(int i=0;i<15;i++){
+				for(int j=0;j<15;j++){
+					String startingCoordinate = board.squareAtCoordinates(i, j).squareName;
+					
+						if(!board.isPlacedInBoard(arrayOfCombinations[k], startingCoordinate, "vertical")){	//chooseword, position, axis
+						System.out.println("This is out of bounds");
+						}
+					
+						else if(!board.checkWordIsLegal(arrayOfCombinations[k], startingCoordinate, "vertical")){
+							System.out.println("This word is not legal");
+						}
+						
+						//HERE: I have to make it calculate the score and then put it in the below string. Also have to finish the first move which is above.
+							else{
+								arrayOfCombinations[acceptedWordsCount] = "score" + arrayOfCombinations[k] + " " + startingCoordinate + " " + "Vertical";
+							}
+					//iterate through board placing it on each one.
+					//performing checks in here.
+					//if the word is successful in the checks then that word, and it's score and it's axis and its starting coordinate are put into the string array
+					
+				}
+			}
+		}
+		/*
+		 * HORIZONTAL PLACING CHECK
+		 */
+		for(int i=0;i<15;i++){
+			for(int j=0;j<15;j++){
+				//same as above but in horizontal 
+			}
+		}
+		
+		for(int i=0; i<AcceptedWords.length;i++){
+			String[] splitAcceptedWords = AcceptedWords[i].split(" ");
+			String[] splitWordToBePlaced = wordToBePlaced.split(" ");
+			if(Integer.parseInt(splitAcceptedWords[0]) > Integer.parseInt(splitWordToBePlaced[0]) )	{	//score will the the [0] word in the string.
+				wordToBePlaced = AcceptedWords[i];		//highest score will advance to be the word.
+			}
+		}
+		// make a decision on the play here
+		// use board.getSqContents to check what is on the board
+		// use Board.SQ_VALUE to check the multipliers
+		// use frame.getAllTiles to check what letters you have
+		// return the corresponding commandCode from UI
+		// if a play, put the start position and letters into word
+		// if an exchange, put the characters into letters
+		String[] isWordGoodEnough = wordToBePlaced.split(" ");
+		
+		/*
+		 * Is the word worth placing? If the score is less than four
+		 * then exchange.
+		 * Then we will check the arrayOfTiles to see which ones have the
+		 * best score and we will exhange the two tiles with the weakest score.
+		 */
+		Tile Weakletter1 = tileArray[0];
+		Tile Weakletter2 = tileArray[1];
+		for(int i=2;i<7;i++){
+			if(tileArray[i].score < Weakletter1.score){
+				tileArray[i] = Weakletter1;
+			}
+			else if((tileArray[i] != Weakletter1) && (tileArray[i].score < Weakletter2.score)){
+				tileArray[i] = Weakletter2;
+			}
+		}
+		
+		if(Integer.parseInt(isWordGoodEnough[0]) < 4){
+			return "exchange " + Weakletter1.tname + " " + Weakletter2.tname;
+		}
+		
+		return wordToBePlaced;
+	}
+	
+	public Word getWord () {
+		return(word);
+	}
+		
+	public String getLetters () {
+		return(letters);
+	}
+}

@@ -1,0 +1,70 @@
+import java.util.HashSet;
+import java.util.Set;
+
+
+public class Bot {
+
+	private Word word = new Word();
+	private String letters;
+	
+	Bot () {
+		word.setWord(0, 0, Word.HORIZONTAL, "HELLO");
+		letters = "XYZ";
+	}
+	
+	public int getCommand (Player player, Board board, Dictionary dictionary) {
+		String[] arrayOfPerms = new String[100000];
+		Tile[] arrayOfTiles = new Tile[100];
+		for(int i=0;i<15;i++){
+			for(int j=0;j<15;j++){
+				
+			}
+		}
+		// make a decision on the play here
+		// use board.getSqContents to check what is on the board
+		// use Board.SQ_VALUE to check the multipliers
+		// use frame.getAllTiles to check what letters you have
+		// return the corresponding commandCode from UI
+		// if a play, put the start position and letters into word
+		// if an exchange, put the characters into letters
+		return(UI.COMMAND_PASS);
+	}
+	
+	public Word getWord () {
+		// should not change
+		return(word);
+	}
+		
+	public String getLetters () {
+		// should not change
+		return(letters);
+	}
+	public static Set<String> generatePerm(String input)
+	{
+	    Set<String> set = new HashSet<String>();
+	    if (input == "")
+	        return set;
+
+	    Character a = input.charAt(0);
+
+	    if (input.length() > 1)
+	    {
+	        input = input.substring(1);
+
+	        Set<String> permSet = generatePerm(input);
+
+	        for (String x : permSet)
+	        {
+	            for (int i = 0; i <= x.length(); i++)
+	            {
+	                set.add(x.substring(0, i) + a + x.substring(i));
+	            }
+	        }
+	    }
+	    else
+	    {
+	        set.add(a + "");
+	    }
+	    return set;
+	}
+}

@@ -1,0 +1,374 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+
+public class Bot {
+
+	private Word word = new Word();
+	private String letters;
+	int botScore = 0;
+	
+	Bot () {
+		word.setWord(0, 0, Word.HORIZONTAL, "HELLO");
+		letters = "XYZ";
+	}
+	
+	public String getCommand (BotBoard board, BotFrame frame) throws RankOutOfBoundsException {
+		int incrementWhenPlacedOnBoard = 0;
+		String[] AcceptedWords = new String[200];
+		Tile[] tileArray = frame.returnArrayOfTiles();
+		char[] arrayOfCharactersInFrame = new char[7];
+		String[] arrayOfCombinations = new String[100000];
+		int[] exceptions = {-1, 0, 1, 2, 3, 4, 5, 6, 7}; //get every combination of size X = {1,2,3,4,5,6,7}, then store each of these an array and loop through each one.
+		
+		String wordToBePlaced = null;
+		/*
+		 * Getting the frame into an array of characters and then 
+		 * changing them into an integer in order to use
+		 * the permutations class
+		 */
+		for(int i=0;tileArray[i] != null;i++){
+			arrayOfCharactersInFrame[i] = tileArray[i].tname;
+		}
+		Integer[] arrayOfCharactersInFrameCasted = new Integer[arrayOfCharactersInFrame.length];		//converting the characters to integers
+		for(int i=0;i<arrayOfCharactersInFrame.length;i++){
+			arrayOfCharactersInFrameCasted[i] = Character.getNumericValue(arrayOfCharactersInFrame[i]); //changing to integers
+		}
+		
+		/*
+		 * All combinations of words being gotten here
+		 */
+		
+		 Permutations<Integer> perm = new Permutations<Integer>(arrayOfCharactersInFrameCasted);
+		 int count = 0;
+		 while(perm.hasNext()){
+		        arrayOfCombinations[count] = Arrays.toString(perm.next());
+		        count++;
+		    }
+		 String[] arrayOfWords = null;
+		 BufferedReader b1 = null;
+		 String Path = new File("src/sowpods").getAbsolutePath();
+		 File BoardURL = new File(Path);
+			InputStream is = new FileInputStream(BoardURL);
+			InputStreamReader  isr = new InputStreamReader(is);
+try{
+	 b1 = new BufferedReader(isr);
+	 
+	 String line;
+	 int i = 0;
+	 
+		 while (((line = b1.readLine() ) != null))  {
+			 arrayOfWords[i] = line;
+			 i++;
+		 }
+	 
+	 b1.close();
+		 for(int i=0;i<arrayOfCombinations.length;i++){
+			 
+		 }
+		//get every combination of these letters and load into arrayOfCombinations
+		 
+		 
+		 
+		 /*
+		  * We need to place the first word.
+		  */
+		 if(incrementWhenPlacedOnBoard == 0){
+			 for(int i=0; i<AcceptedWords.length;i++){
+					String[] splitAcceptedWords = AcceptedWords[i].split(" ");
+					String[] splitWordToBePlaced = wordToBePlaced.split(" ");
+					if(Integer.parseInt(splitAcceptedWords[0]) > Integer.parseInt(splitWordToBePlaced[0]) )	{	//score will the the [0] word in the string.
+						wordToBePlaced = AcceptedWords[i];		//highest score will advance to be the word.
+					}
+				}String[] isWordGoodEnough = wordToBePlaced.split(" ");
+				
+				/*
+				 * Is the word worth placing? If the score is less than four
+				 * then exchange.
+				 * Then we will check the arrayOfTiles to see which ones have the
+				 * best score and we will exhange the two tiles with the weakest score.
+				 */
+				Tile Weakletter1 = tileArray[0];
+				Tile Weakletter2 = tileArray[1];
+				for(int i=2;i<7;i++){
+					if(tileArray[i].score < Weakletter1.score){
+						tileArray[i] = Weakletter1;
+					}
+					else if((tileArray[i] != Weakletter1) && (tileArray[i].score < Weakletter2.score)){
+						tileArray[i] = Weakletter2;
+					}
+				}
+				
+				if(Integer.parseInt(isWordGoodEnough[0]) < 4){
+					return "exchange " + Weakletter1.tname + " " + Weakletter2.tname;
+				}
+				else{
+					 incrementWhenPlacedOnBoard = 1;
+					 return wordToBePlaced; //the best word out of the frame
+				}
+			 }
+		 
+		 
+		 
+		 
+		 else{
+
+			/*
+			 * VERTICAL PLACING CHECK
+			 */
+			 int currentTileScore =0;
+			 int acceptedWordsCount = 0;
+			for(int k=0;k<arrayOfCombinations.length;k++){
+				for(int i=0;i<15;i++){
+					for(int j=0;j<15;j++){
+						String startingCoordinate = board.squareAtCoordinates(i, j).squareName;
+						
+							
+							//HERE: I have to make it calculate the score and then put it in the below string. Also have to finish the first move which is above.
+							Tile foundTile = null;
+							boolean isDword = false;
+							boolean isTword = false;
+							int immediateScore = 0;
+							Tile tempTile = null;
+							Tile[] tempTiles = new Tile[7];
+							int amountTakenOut = 0;
+							
+							
+							int startingCoordinatei = 0;
+							int startingCoordinatej = 0;
+							
+							for(int l=0;i<15;i++){
+								for(int w=0;j<15;j++){
+									if(board.squareAtCoordinates(l, w).squareName.equalsIgnoreCase(startingCoordinate)){
+										startingCoordinatei = l;
+										startingCoordinatej = w;						//Initialise the starting coordinate which will be looped through
+									}
+								}
+							}
+							for(int l=0;l<arrayOfCombinations[k].length();l++){
+								
+								arrayOfCombinations[k] = arrayOfCombinations[k].toUpperCase();
+								char letterKey = arrayOfCombinations[k].charAt(l); 		//The first letter will be the thing we're looking for in the frame.
+								for(int w=0;w<frame.frameSize();w++){
+									Tile temp = frame.getTileRank(j);//loop through the frame looking for that tile which has the letter from above.
+									if(temp!=null){
+									if(letterKey == temp.tname){ //yes, so then we have the stile from the frame which we want to use
+										foundTile = temp;
+									
+									
+										foundTile.onSpecialSquare = board.squareAtCoordinates(startingCoordinatei,startingCoordinatej).squareScore;
+										startingCoordinatei++;
+										
+				
+										if(foundTile.onSpecialSquare.equalsIgnoreCase("dl")){
+											currentTileScore = currentTileScore + (foundTile.score * 2);
+											immediateScore = immediateScore + (foundTile.score *2);
+										}
+										else if(foundTile.onSpecialSquare.equalsIgnoreCase("tl")){
+											currentTileScore = currentTileScore + (foundTile.score * 3);
+											immediateScore = immediateScore + (foundTile.score *3);
+										}
+										else if(foundTile.onSpecialSquare.equalsIgnoreCase("dw")){
+											immediateScore = immediateScore + foundTile.score;
+											currentTileScore = currentTileScore + foundTile.score;
+											isDword = true;
+										}
+										else if(temp.onSpecialSquare.equalsIgnoreCase("tw")){
+											immediateScore = immediateScore + foundTile.score;
+											currentTileScore = currentTileScore + foundTile.score;
+											isTword = true;
+										}
+										else{
+											immediateScore = immediateScore + foundTile.score;
+											currentTileScore = currentTileScore + foundTile.score;
+										}
+										tempTile = frame.removeFromFrame(letterKey);
+										tempTiles[amountTakenOut] = tempTile;
+										amountTakenOut++;
+									}
+									}
+									} 
+								}	
+							
+							if(isDword){
+								currentTileScore = currentTileScore - immediateScore;
+								currentTileScore = currentTileScore + (immediateScore*2);
+							}
+							else if(isTword){
+								currentTileScore = currentTileScore - immediateScore;
+								currentTileScore = currentTileScore + (immediateScore*3);
+							}
+							if(!board.isPlacedInBoard(arrayOfCombinations[k], startingCoordinate, "vertical")){	//chooseword, position, axis
+								System.out.println("This is out of bounds");
+								}
+							
+								else if(!board.checkWordIsLegal(arrayOfCombinations[k], startingCoordinate, "vertical")){
+									System.out.println("This word is not legal");
+								}
+								else{
+									AcceptedWords[acceptedWordsCount] = currentTileScore + arrayOfCombinations[k] + " " + startingCoordinate + " " + "Vertical";
+								}
+						//iterate through board placing it on each one.
+						//performing checks in here.
+						//if the word is successful in the checks then that word, and it's score and it's axis and its starting coordinate are put into the string array
+						//Format: score, word, sc, axis.
+					}
+				}
+			}
+			/*
+			 * HORIZONTAL PLACING CHECK
+			 */
+			currentTileScore =0;
+			acceptedWordsCount = 0;
+			for(int k=0;k<arrayOfCombinations.length;k++){
+				for(int i=0;i<15;i++){
+					for(int j=0;j<15;j++){
+						String startingCoordinate = board.squareAtCoordinates(i, j).squareName;
+						
+							
+							//HERE: I have to make it calculate the score and then put it in the below string. Also have to finish the first move which is above.
+							Tile foundTile = null;
+							boolean isDword = false;
+							boolean isTword = false;
+							int immediateScore = 0;
+							Tile tempTile = null;
+							Tile[] tempTiles = new Tile[7];
+							int amountTakenOut = 0;
+							
+							
+							int startingCoordinatei = 0;
+							int startingCoordinatej = 0;
+							
+							for(int l=0;i<15;i++){
+								for(int w=0;j<15;j++){
+									if(board.squareAtCoordinates(l, w).squareName.equalsIgnoreCase(startingCoordinate)){
+										startingCoordinatei = l;
+										startingCoordinatej = w;						//Initialise the starting coordinate which will be looped through
+									}
+								}
+							}
+							for(int l=0;l<arrayOfCombinations[k].length();l++){
+								
+								arrayOfCombinations[k] = arrayOfCombinations[k].toUpperCase();
+								char letterKey = arrayOfCombinations[k].charAt(l); 		//The first letter will be the thing we're looking for in the frame.
+								for(int w=0;w<frame.frameSize();w++){
+									Tile temp = frame.getTileRank(j);//loop through the frame looking for that tile which has the letter from above.
+									if(temp!=null){
+									if(letterKey == temp.tname){ //yes, so then we have the stile from the frame which we want to use
+										foundTile = temp;
+									
+									
+										foundTile.onSpecialSquare = board.squareAtCoordinates(startingCoordinatei,startingCoordinatej).squareScore;
+										startingCoordinatej++;
+										
+				
+										if(foundTile.onSpecialSquare.equalsIgnoreCase("dl")){
+											currentTileScore = currentTileScore + (foundTile.score * 2);
+											immediateScore = immediateScore + (foundTile.score *2);
+										}
+										else if(foundTile.onSpecialSquare.equalsIgnoreCase("tl")){
+											currentTileScore = currentTileScore + (foundTile.score * 3);
+											immediateScore = immediateScore + (foundTile.score *3);
+										}
+										else if(foundTile.onSpecialSquare.equalsIgnoreCase("dw")){
+											immediateScore = immediateScore + foundTile.score;
+											currentTileScore = currentTileScore + foundTile.score;
+											isDword = true;
+										}
+										else if(temp.onSpecialSquare.equalsIgnoreCase("tw")){
+											immediateScore = immediateScore + foundTile.score;
+											currentTileScore = currentTileScore + foundTile.score;
+											isTword = true;
+										}
+										else{
+											immediateScore = immediateScore + foundTile.score;
+											currentTileScore = currentTileScore + foundTile.score;
+										}
+										tempTile = frame.removeFromFrame(letterKey);
+										tempTiles[amountTakenOut] = tempTile;
+										amountTakenOut++;
+									}
+									}
+									} 
+								}	
+							
+							if(isDword){
+								currentTileScore = currentTileScore - immediateScore;
+								currentTileScore = currentTileScore + (immediateScore*2);
+							}
+							else if(isTword){
+								currentTileScore = currentTileScore - immediateScore;
+								currentTileScore = currentTileScore + (immediateScore*3);
+							}
+							if(!board.isPlacedInBoard(arrayOfCombinations[k], startingCoordinate, "horizontal")){	//chooseword, position, axis
+								System.out.println("This is out of bounds");
+								}
+							
+								else if(!board.checkWordIsLegal(arrayOfCombinations[k], startingCoordinate, "vertical")){
+									System.out.println("This word is not legal");
+								}
+								else{
+									AcceptedWords[acceptedWordsCount] = currentTileScore + arrayOfCombinations[k] + " " + startingCoordinate + " " + "Vertical";
+								}
+						//iterate through board placing it on each one.
+						//performing checks in here.
+						//if the word is successful in the checks then that word, and it's score and it's axis and its starting coordinate are put into the string array
+						//Format: score, word, sc, axis.
+					}
+				}
+			}
+			
+			for(int i=0; i<AcceptedWords.length;i++){
+				String[] splitAcceptedWords = AcceptedWords[i].split(" ");
+				String[] splitWordToBePlaced = wordToBePlaced.split(" ");
+				if(Integer.parseInt(splitAcceptedWords[0]) > Integer.parseInt(splitWordToBePlaced[0]) )	{	//score will the the [0] word in the string.
+					wordToBePlaced = AcceptedWords[i];		//highest score will advance to be the word.
+				}
+			}
+			// make a decision on the play here
+			// use board.getSqContents to check what is on the board
+			// use Board.SQ_VALUE to check the multipliers
+			// use frame.getAllTiles to check what letters you have
+			// return the corresponding commandCode from UI
+			// if a play, put the start position and letters into word
+			// if an exchange, put the characters into letters
+			String[] isWordGoodEnough = wordToBePlaced.split(" ");
+			
+			/*
+			 * Is the word worth placing? If the score is less than four
+			 * then exchange.
+			 * Then we will check the arrayOfTiles to see which ones have the
+			 * best score and we will exhange the two tiles with the weakest score.
+			 */
+			Tile Weakletter1 = tileArray[0];
+			Tile Weakletter2 = tileArray[1];
+			for(int i=2;i<7;i++){
+				if(tileArray[i].score < Weakletter1.score){
+					tileArray[i] = Weakletter1;
+				}
+				else if((tileArray[i] != Weakletter1) && (tileArray[i].score < Weakletter2.score)){
+					tileArray[i] = Weakletter2;
+				}
+			}
+			
+			if(Integer.parseInt(isWordGoodEnough[0]) < 4){
+				return "exchange " + Weakletter1.tname + " " + Weakletter2.tname;
+			}
+			else{
+				return wordToBePlaced;
+			}
+		 }
+	}
+	
+	public Word getWord () {
+		return(word);
+	}
+		
+	public String getLetters () {
+		return(letters);
+	}
+}

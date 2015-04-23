@@ -1,0 +1,190 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+
+public class Bot {
+
+	private Word word = new Word();
+	private String letters;
+	
+	Bot () {
+		word.setWord(0, 0, Word.HORIZONTAL, "HELLO");
+		letters = "XYZ";
+	}
+	
+	public int getCommand (Player player, Board board, Dictionary dictionary) throws FileNotFoundException {
+
+		/*
+		 * HORIZONTALLY:
+		 * Check whether there is something in the said column.
+		 */
+		String frameString = "";
+		String frameStringInitial ="";
+		
+		
+		for(int i=0;i<player.getFrame().size();i++){
+			frameStringInitial = frameStringInitial + player.getFrame().getTile(i).getFace();
+			frameString = frameString + player.getFrame().getTile(i).getFace();
+		}
+
+
+String checkWord = null;
+File inputFile = new File("src/sowpods");
+Scanner in = new Scanner(inputFile);
+String[] AcceptedWords = new String[1000];
+int acceptedWordCount = 0;
+boolean flag = false;	  // assume true	
+boolean wordFlag = false;
+int checkcount = 1;
+
+while (in.hasNextLine()) {
+			checkcount = 1;
+			frameString = frameStringInitial;
+				checkWord = in.nextLine();
+				//System.out.println(checkWord + checkWord.length());
+				checkcount = 0;
+				
+				for(int k=0;k<checkWord.length();k++){	
+							// go threw word
+							String checkingChar = Character.toString(checkWord.charAt(k));			// change to next letter	
+							
+								if(frameString.contains(checkingChar)){
+									//System.out.println(frameString);
+									frameString = frameString.replaceFirst(checkingChar, ".");
+									//System.out.println(frameString);
+									flag = true;
+									checkcount++;
+								}
+								else {
+									flag = false;
+								}
+
+				}
+				
+				if(checkcount == checkWord.length()){
+					AcceptedWords[acceptedWordCount] = checkWord;
+					//System.out.println("accepted:" + AcceptedWords[acceptedWordCount]);
+					acceptedWordCount++;
+					flag = false;
+				
+				}
+			
+			//System.out.println("Checkcount: "+checkcount+" checkWord.length: " + checkWord.length());
+				
+}
+
+
+
+		for(int i=1;i<15;i++){
+								frameString = frameStringInitial;
+								
+								
+			
+			
+			
+			while((board.isRowEmpty(i))) {
+					frameString = frameStringInitial;
+					
+								for(int j=0;j<15;j++){
+									if(board.getSqContents(i, j) != ' '){
+										frameString = frameString + board.getSqContents(i, j);
+									}
+								}
+					
+					 flag = false;	  // assume true	
+					 wordFlag = false;
+					checkcount = 1;
+					
+						while (in.hasNextLine()) {
+									checkcount = 1;
+									frameString = frameStringInitial;
+										checkWord = in.nextLine();
+										//System.out.println(checkWord + checkWord.length());
+										checkcount = 0;
+										
+										for(int k=0;k<checkWord.length();k++){	
+													// go threw word
+													String checkingChar = Character.toString(checkWord.charAt(k));			// change to next letter	
+													
+														if(frameString.contains(checkingChar)){
+															//System.out.println(frameString);
+															frameString = frameString.replaceFirst(checkingChar, ".");
+															//System.out.println(frameString);
+															flag = true;
+															checkcount++;
+														}
+														else {
+															flag = false;
+														}
+						
+										}
+										
+										if(checkcount == checkWord.length()){
+											AcceptedWords[acceptedWordCount] = checkWord;
+											//System.out.println("accepted:" + AcceptedWords[acceptedWordCount]);
+											acceptedWordCount++;
+											flag = false;
+										
+										}
+									
+									//System.out.println("Checkcount: "+checkcount+" checkWord.length: " + checkWord.length());
+										
+						}
+						System.out.println("looped");
+			}
+						
+		
+		}
+		return(UI.COMMAND_PASS);	
+		
+		
+		// make a decision on the play here
+				// use board.getSqContents to check what is on the board
+				// use Board.SQ_VALUE to check the multipliers
+				// use frame.getAllTiles to check what letters you have
+				// return the corresponding commandCode from UI
+				// if a play, put the start position and letters into word
+				// if an exchange, put the characters into letters
+		}
+	public Word getWord () {
+		// should not change
+		return(word);
+	}
+		
+	public String getLetters () {
+		// should not change
+		return(letters);
+	}
+	public static Set<String> generatePerm(String input)
+	{
+	    Set<String> set = new HashSet<String>();
+	    if (input == "")
+	        return set;
+
+	    Character a = input.charAt(0);
+
+	    if (input.length() > 1)
+	    {
+	        input = input.substring(1);
+
+	        Set<String> permSet = generatePerm(input);
+
+	        for (String x : permSet)
+	        {
+	            for (int i = 0; i <= x.length(); i++)
+	            {
+	                set.add(x.substring(0, i) + a + x.substring(i));
+	            }
+	        }
+	    }
+	    else
+	    {
+	        set.add(a + "");
+	    }
+	    return set;
+	}
+}

@@ -1,0 +1,24 @@
+
+public class BotTest {
+	public static void main(String[] args) throws RankOutOfBoundsException{
+		Pool pool = new Pool();
+		Board board = new Board();
+		Bot botOne = new Bot();
+		Bot botTwo = new Bot();
+		BotFrame FrameOne = new BotFrame(botOne);
+		BotFrame FrameTwo = new BotFrame(botTwo);
+		boolean endGame = false;
+		//insert game here.
+		while(!endGame){
+		String wordToBeInserted = botOne.getCommand(board, FrameOne);
+		String[] finalWord = wordToBeInserted.split(" ");
+		board.insertOnBoard(, startingCoordinate, axis, f)
+		if(pool.size() <= 0){
+			endGame = true;
+		}
+		}
+			System.out.println("The Game is over");
+			board.displayBoard();
+		
+	}
+}

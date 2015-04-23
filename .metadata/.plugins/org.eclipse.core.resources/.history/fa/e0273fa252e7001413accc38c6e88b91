@@ -1,0 +1,11 @@
+
+public class BotTest {
+	public static void main(String[] args){
+		Bot b = new Bot();
+		Player p = new Player();
+		Dictionary d = new Dictionary();
+		Frame f = new Frame();
+		Board board = new Board();
+		b.getCommand(p,board,d,f);
+	}
+}

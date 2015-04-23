@@ -1,0 +1,16 @@
+import java.io.FileNotFoundException;
+
+
+public class newBotTest {
+	public static void main(String[] args) throws FileNotFoundException{
+		newBot b = new newBot();
+		Player p = new Player();
+		Dictionary d = new Dictionary();
+		Frame f = new Frame();
+		Pool pool = new Pool();
+		f.refill(pool);
+		Board board = new Board();
+		b.getCommand(p,board,d,f);
+		b.getAnagram(p,board,d,f);
+	}
+}

@@ -1,0 +1,21 @@
+
+public class BotTest {
+	public static void main(String[] args){
+		Pool pool = new Pool();
+		Board board = new Board();
+		Bot botOne = new Bot();
+		Bot botTwo = new Bot();
+		BotFrame FrameOne = new BotFrame(botOne);
+		BotFrame FrameTwo = new BotFrame(botTwo);
+		
+		boolean endGame = false;
+		
+		if(pool.size() <= 0){
+			endGame = true;
+		}
+		if(endGame){
+			System.out.println("The Game is over");
+			board.displayBoard();
+		}
+	}
+}

@@ -1,0 +1,108 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+
+public class newBot {
+
+	private Word word = new Word();
+	private String letters;
+	
+	newBot () {
+		word.setWord(0, 0, Word.HORIZONTAL, "HELLO");
+		letters = "XYZ";
+	}
+	
+	public int getCommand (Player player, Board board, Dictionary dictionary, Frame frame) throws FileNotFoundException {
+		String frameString ="";
+		for(int i=0;i<frame.size();i++){
+			frameString = frameString + frame.getTile(i).getFace();
+		}
+		//System.out.println(frameString);
+		if(board.isFirstPlay()){
+			Set<String> s = newBot.generatePerm(frameString);
+			String perms = s.toString();
+			ArrayList<String> permList = new ArrayList<String>();
+			String[] arrayofperms = new String[100000];
+			arrayofperms = perms.split(", ");
+			String[] overallArray = new String[100000];
+			overallArray =arrayofperms;
+			overallArray[0] = overallArray[0].substring(1);
+			overallArray[overallArray.length-1] = overallArray[overallArray.length-1].replaceAll("]", "");
+			for(int i=0;i<overallArray.length-1;i++){
+				permList.add(overallArray[i]);
+			}
+		
+			int x=0;
+			while(x<7){
+				System.out.println("X CHANGE");
+				for(int i=0;i<arrayofperms.length;i++){
+				
+					permList.add(arrayofperms[i].substring(x));
+					System.out.println("permListSize: " + permList.size()+"\n");
+				}
+				x++;
+			}
+		
+			//System.out.println(overallArray.toString());
+		}
+		for(int i=0;i<15;i++){
+			for(int j=0;j<15;j++){
+				if(board.isRowEmpty(i)){
+					
+				}
+			}
+		}
+		return(UI.COMMAND_PASS);	
+		
+		
+		// make a decision on the play here
+				// use board.getSqContents to check what is on the board
+				// use Board.SQ_VALUE to check the multipliers
+				// use frame.getAllTiles to check what letters you have
+				// return the corresponding commandCode from UI
+				// if a play, put the start position and letters into word
+				// if an exchange, put the characters into letters
+		}
+	public Word getWord () {
+		// should not change
+		return(word);
+	}
+		
+	public String getLetters () {
+		// should not change
+		return(letters);
+	}
+	public static Set<String> generatePerm(String input)
+	{
+	    Set<String> set = new HashSet<String>();
+	    if (input == "")
+	        return set;
+
+	    Character a = input.charAt(0);
+
+	    if (input.length() > 1)
+	    {
+	        input = input.substring(1);
+
+	        Set<String> permSet = generatePerm(input);
+
+	        for (String x : permSet)
+	        {
+	            for (int i = 0; i <= x.length(); i++)
+	            {
+	                set.add(x.substring(0, i) + a + x.substring(i));
+	            }
+	        }
+	    }
+	    else
+	    {
+	        set.add(a + "");
+	    }
+	    return set;
+	}
+}

@@ -1,0 +1,175 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Comparator;
+
+
+public class newBot  {
+
+	private Word word = new Word();
+	private String letters;
+	
+	newBot () {
+		word.setWord(0, 0, Word.HORIZONTAL, "HELLO");
+		letters = "XYZ";
+	}
+	
+public int getCommand (Player player, Board board, Dictionary dictionary, Frame frame) throws FileNotFoundException {
+		
+		
+		return(UI.COMMAND_PASS);	
+		
+		
+		// make a decision on the play here
+				// use board.getSqContents to check what is on the board
+				// use Board.SQ_VALUE to check the multipliers
+				// use frame.getAllTiles to check what letters you have
+				// return the corresponding commandCode from UI
+				// if a play, put the start position and letters into word
+				// if an exchange, put the characters into letters
+		}
+	
+	public Set<String> getAnagram (Player player, Board board, Dictionary dictionary, Frame frame) throws FileNotFoundException, ArrayIndexOutOfBoundsException {
+		long start = System.currentTimeMillis();
+		ArrayList<String> dictionaryPasser = new ArrayList<String>();
+		ArrayList<String> permList = new ArrayList<String>();
+		String frameString ="";
+		for(int i=0;i<frame.size();i++){
+			frameString = frameString + frame.getTile(i).getFace();
+		}
+		if(!board.isFirstPlay()){
+			for(int i=0;i<15;i++){
+				for(int j=0;j<15;j++){
+					if(board.getSqContents(i,j) != ' '){
+						System.out.println(board.getSqContents(i, j));
+						frameString = frameString + board.getSqContents(i, j);
+						
+					}
+				}
+			}
+		}
+		
+		
+					Set<String> s = newBot.generatePerm(frameString);
+					String perms = s.toString();
+					String[] overallArray = perms.split(", ");
+					overallArray[0] = overallArray[0].substring(1);
+					overallArray[overallArray.length-1] = overallArray[overallArray.length-1].replaceAll("]", "");
+					for(int i=0;i<overallArray.length-1;i++){
+						permList.add(overallArray[i]);
+					}
+				
+					int x=0;
+					while(x<7){
+						//System.out.println("X CHANGE");
+						for(int i=0;i<overallArray.length-1;i++){
+							int w = permList.size()-1;
+							if(overallArray[i].substring(x).length()>3){
+								permList.add(overallArray[i].substring(x));
+							}
+							//System.out.println(permList.get(w));
+							//System.out.println("permListSize: " + permList.size()+"\n");
+						}
+						x++;
+				
+				
+				
+				for(int i=0;i<permList.size()-1;i++){
+				//	ArrayList<String> prevDictionaryPasser = new ArrayList<String>();
+					//prevDictionaryPasser = dictionaryPasser;
+					dictionaryPasser.add(permList.get(i));
+					//System.out.println(dictionaryPasser.size());
+					//System.out.println(dictionaryPasser.get(dictionaryPasser.size()-1));
+					if(!dictionary.areWords(dictionaryPasser)){
+						System.out.print("");
+						dictionaryPasser.remove(permList.get(i));
+						//System.out.println(dictionaryPasser.size());
+					}
+					else{
+						//System.out.println("WordAccepted");
+						//System.out.println("SIZE: " + Integer.toString(dictionaryPasser.size()-1));
+					}
+				}
+				/*for (int i = 0; i < dictionaryPasser.size(); i++) {
+				    String value = dictionaryPasser.get(i);
+				    System.out.println("Element: " + value);
+				}*/
+				long end = System.currentTimeMillis();
+				//System.out.println(dictionaryPasser.size());
+				//System.out.println(end-start);
+			}
+					Set<String> set = new HashSet<String>(dictionaryPasser);
+					return set;
+		}
+	public ArrayList<String> findBestWord(Set<String> set, Board board, Frame frame) {
+		ArrayList<String> bestList = new ArrayList<String>();
+		bestList.addAll(set);
+		String longestWord = null;
+		boolean notPlaced = true;
+			bestList.remove(longestWord);
+			longestWord = bestList.get(0);
+			for(int i=1;i<bestList.size()-1;i++){
+				if(longestWord.length() < bestList.get(i).length()){
+					longestWord = bestList.get(i);
+				}
+			}
+			System.out.println(longestWord);
+			int bestScore = 0;
+			Word bestWordInQuestion = new Word();
+			for(int i=0;i<15;i++){
+				for(int j=0;j<15;j++){
+					word.setWord(i, j, 0, longestWord);
+					if(board.checkWord(word, frame) == UI.WORD_OK){
+						if(bestScore < board.getTotalWordScore(word)){
+							bestScore = board.getTotalWordScore(word);
+							bestWordInQuestion = word;
+							System.out.println(word.getLetters());
+						}
+					}
+				}
+			}
+		return null;
+	}
+	public Word getWord () {
+		// should not change
+		return(word);
+	}
+		
+	public String getLetters () {
+		// should not change
+		return(letters);
+	}
+	public static Set<String> generatePerm(String input)
+	{
+	    Set<String> set = new HashSet<String>();
+	    if (input == "")
+	        return set;
+
+	    Character a = input.charAt(0);
+
+	    if (input.length() > 1)
+	    {
+	        input = input.substring(1);
+
+	        Set<String> permSet = generatePerm(input);
+
+	        for (String x : permSet)
+	        {
+	            for (int i = 0; i <= x.length(); i++)
+	            {
+	                set.add(x.substring(0, i) + a + x.substring(i));
+	            }
+	        }
+	    }
+	    else
+	    {
+	        set.add(a + "");
+	    }
+	    return set;
+	}
+}

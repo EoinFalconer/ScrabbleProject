@@ -1,0 +1,12 @@
+
+public class PermutationsTest {
+	public static void main(String[] args){
+	    TCMath.Permutations<Integer> perm = new TCMath.Permutations<Integer>(new Integer[]{3,3,4,4,4,5,5});
+	    int count = 0;
+	    while(perm.hasNext()){
+	        System.out.println(Arrays.toString(perm.next()));
+	        count++;
+	    }
+	    System.out.println("total: " + count);
+	}
+}

@@ -1,0 +1,10 @@
+
+public class BotTest {
+	public static void main(String[] args){
+		Pool pool = new Pool();
+		Bot botOne = new Bot();
+		Bot botTwo = new Bot();
+		Frame FrameOne = new Frame();
+		Frame FrameTwo = new Frame();
+	}
+}
