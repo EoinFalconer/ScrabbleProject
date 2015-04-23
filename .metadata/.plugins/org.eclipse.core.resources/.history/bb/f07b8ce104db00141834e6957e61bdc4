@@ -12,10 +12,10 @@
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -83,14 +83,18 @@ public class Board {
     	}
     }
     
-    public void populateBoard() throws NullPointerException, FileNotFoundException {
+    public void populateBoard() throws NullPointerException {
     	 BufferedReader b1 = null;
     	 
-					File BoardURL = new File("src/boardtxt.txt");
-					InputStream is = new FileInputStream(BoardURL);
-					InputStreamReader  isr = new InputStreamReader(is);
+    	 URL BoardURL = null;
+				try {
+					BoardURL = new URL("http://breynolds.netsoc.com/boardtxt.txt");
+				} 
+				catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				}
 		 try{
-			 b1 = new BufferedReader(isr);
+			 b1 = new BufferedReader(new InputStreamReader(BoardURL.openStream()));
 			 
 			 String line;
 			 int i = 0;
@@ -380,8 +384,7 @@ public class Board {
 			    		return false;
 			    	}
 			    }
-    public void removeWordFromBoard(String startingCoordinate, String word, String axis ,Square[] alreadyOnBoard){
-    	
+    public void removeWordFromBoard(String startingCoordinate, String word, String axis){
     	int iCoordinate = 0;
     	int jCoordinate = 0;
     	for(int i=0;i<15;i++){
@@ -392,42 +395,16 @@ public class Board {
     			}
     		}
     	}
-    	if(axis.equalsIgnoreCase("horizontal")){
-    		boolean dontRemove = false;
+    	if(axis.equalsIgnoreCase("horizontal"))
     	for(int i=0;i<word.length();i++){
-    		for(int l=0;l<alreadyOnBoard.length;l++){
-    			if(boardArray[iCoordinate][jCoordinate] == alreadyOnBoard[l]){
-    				dontRemove = true;
-    				break;
-    			}
-    			else{
-    				dontRemove = false;
-    			}
-    		}
-
-    		if(!dontRemove){
-    			boardArray[iCoordinate][jCoordinate].tileInSquareScore = 0;
-    			boardArray[iCoordinate][jCoordinate].tileInSquareValue = ' ';
-    		}
+    		boardArray[iCoordinate][jCoordinate].tileInSquareScore = 0;
+    		boardArray[iCoordinate][jCoordinate].tileInSquareValue = ' ';
     		jCoordinate++;
     	}
-    	}
     	else{
-    		boolean dontRemove = false;
     		for(int i=0;i<word.length();i++){
-    			for(int l=0;l<alreadyOnBoard.length;l++){
-    				if(boardArray[iCoordinate][jCoordinate] == alreadyOnBoard[l]){
-    					dontRemove = true;
-    					break;
-    				}
-    				else{
-    					dontRemove = false;
-    				}
-    			}
-    			if(!dontRemove){
-    				boardArray[iCoordinate][jCoordinate].tileInSquareScore = 0;
-    				boardArray[iCoordinate][jCoordinate].tileInSquareValue = ' ';
-    			}
+        		boardArray[iCoordinate][jCoordinate].tileInSquareScore = 0;
+        		boardArray[iCoordinate][jCoordinate].tileInSquareValue = ' ';
         		iCoordinate++;
         	}
     	}
@@ -729,10 +706,9 @@ public class Board {
     	return temp;
     }
     
-    public Square[] insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
-    	        int rCoordinate=0, cCoordinate=0;
-    	        Square[] alreadyOnBoard = new Square[7];
-    	        int amountAlreadyOnBoard = 0;
+    public void insertOnBoard(String chooseWord, String startingCoordinate, String axis, Frame f) throws RankOutOfBoundsException, VectorFullException, ArrayIndexOutOfBoundsException, NullPointerException{
+    	        int rCoordinate=0, cCoordinate=0;    
+    	 
     	        for(int i=0;i<15;i++){						//initilises rcooridinate and ccoordinate.
     	        	for(int j=0;j<15;j++){
     	        		if(boardArray[i][j].squareName.equalsIgnoreCase(startingCoordinate)){
@@ -762,8 +738,6 @@ public class Board {
 			    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) { //horizontal and tile is in frame and square isnt empty
 			    	        			
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-			    	        				alreadyOnBoard[amountAlreadyOnBoard] = boardArray[rCoordinate][cCoordinate];
-			    	        				amountAlreadyOnBoard++;
 			    	        				cCoordinate++;
 			    	
 			    	        			}
@@ -789,8 +763,6 @@ public class Board {
 		    	        		else if(!isSquareEmpty(rCoordinate, cCoordinate)) {			// vertical and tile is in frame and squares not empty
 		    	        			
 		    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-		    	        				alreadyOnBoard[amountAlreadyOnBoard] = boardArray[rCoordinate][cCoordinate];
-		    	        				amountAlreadyOnBoard++;
 		    	        				rCoordinate++;
 		    	        			}
 		    	        			else {
@@ -806,8 +778,6 @@ public class Board {
 		    	        		if(axis.equalsIgnoreCase("horizontal")) {
 			    	        		if(!isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-			    	        				alreadyOnBoard[amountAlreadyOnBoard] = boardArray[rCoordinate][cCoordinate];
-			    	        				amountAlreadyOnBoard++;
 			    	        				cCoordinate++;
 			    	        			}
 			    	        			else {
@@ -821,8 +791,6 @@ public class Board {
 		    	        		else if(axis.equalsIgnoreCase("vertical")) {
 		    	        			if(!isSquareEmpty(rCoordinate, cCoordinate)) {
 			    	        			if(letterToBeInserted == boardArray[rCoordinate][cCoordinate].tileInSquareValue) {
-			    	        				alreadyOnBoard[amountAlreadyOnBoard] = boardArray[rCoordinate][cCoordinate];
-			    	        				amountAlreadyOnBoard++;
 			    	        				rCoordinate++;
 			    	        			}
 			    	        			
@@ -835,7 +803,6 @@ public class Board {
 		    	        	}	
 	    	        	}  
     	        }
-    	        return alreadyOnBoard;
     	  }
     	               	               
     public boolean checkWordIsLegal(String chooseWord,String startingCoordinate, String axis) throws ArrayIndexOutOfBoundsException{
@@ -924,48 +891,15 @@ public class Board {
 		return flag ; 
     }
     
-    public boolean checkAllWordsOnBoard(String acceptedWords) throws FileNotFoundException, NoSuchElementException{
+    public boolean checkAllWordsOnBoard(String acceptedWords) throws FileNotFoundException{
     	Scanner scanner = new Scanner(theFile);
-    	boolean flag1 = true;
-    	boolean flag2 = true;
+    	boolean flag1 = false;
+    	boolean flag2 = false;
     	String exceptionSquares = "";
     	String wordInQuestion="";
     	
-    	for(int i=0;i<15;i++){
-    		 exceptionSquares = "";
-    		for(int j=0;j<15;j++){
-    			if((boardArray[i][j].tileInSquareValue != ' ') && (!exceptionSquares.contains(boardArray[i][j].squareName))){
-    					wordInQuestion="";
-    				while(boardArray[i][j].tileInSquareValue !=' '){
-    					wordInQuestion = wordInQuestion + boardArray[i][j].tileInSquareValue;
-    					exceptionSquares = exceptionSquares + boardArray[i][j].squareName;
-    					j++;
-    				}
-<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/ca/b029ac8aeee200141fe5ba6991c9f43b
-=======
-    				//System.out.println("WordinquestionHorizontal: " + wordInQuestion +"\nExceptionSquaresHorizontal: " + exceptionSquares);
->>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/Board.java
-    				if(wordInQuestion.length() > 1){
-    					if(scanner.hasNext()) {
-    						
-							flag1 = (((scanner.useDelimiter("\\Z").next()).contains(wordInQuestion+'\n')) || (acceptedWords.contains(wordInQuestion)));
-<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/ca/b029ac8aeee200141fe5ba6991c9f43b
-=======
-							System.out.println(flag1);
-							System.out.println("horizontal: " + wordInQuestion);
->>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/Board.java
-
-    					}
-						if(!flag1){
-							break;
-						}
-					}
-    			}
-    		}
-    	}
-    	scanner.close();
     	Scanner scanner1 = new Scanner(theFile);
-    	for(int j=0;j<15;j++){	
+    	for(int j=0;j<15;j++){
     		 exceptionSquares = "";
     		for(int i=0;i<15;i++){
     			if((boardArray[i][j].tileInSquareValue != ' ')&&(!exceptionSquares.contains(boardArray[i][j].squareName))){
@@ -975,20 +909,9 @@ public class Board {
     					exceptionSquares = exceptionSquares + boardArray[i][j].squareName;
     					i++;
     				}
-<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/ca/b029ac8aeee200141fe5ba6991c9f43b
-    					if(wordInQuestion.length() > 1){
-    						if(scanner1.hasNext()) {
-    							
-    							flag2 = ((scanner1.useDelimiter("\\Z").next()).contains(wordInQuestion+'\n')|| (acceptedWords.contains(wordInQuestion)));
-=======
-    				//System.out.println("WordinquestionVertical: " + wordInQuestion +"\nExceptionSquaresVertical: " + exceptionSquares);
-    					if(wordInQuestion.length() > 1){
-    						if(scanner1.hasNext()) {
-    							System.out.println("vertical: " + wordInQuestion);
-    							flag2 = ((scanner1.useDelimiter("\\Z").next()).contains(wordInQuestion+'\n')|| (acceptedWords.contains(wordInQuestion)));
-    							System.out.println(flag2);
->>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/Board.java
-    						}
+    				System.out.println("WordinquestionVertical: " + wordInQuestion +"\nExceptionSquaresVertical: " + exceptionSquares);
+    					if(wordInQuestion.length() >= 1){
+    						flag2 = ((scanner1.useDelimiter("\\Z").next()).contains(wordInQuestion)|| (acceptedWords.contains(wordInQuestion)));
     						if(!flag2){
     							break;
     						}
@@ -998,6 +921,28 @@ public class Board {
     		
     	}
     	scanner1.close();
+      	for(int i=0;i<15;i++){
+   		 exceptionSquares = "";
+   		for(int j=0;j<15;j++){
+   			if((boardArray[i][j].tileInSquareValue != ' ') && (!exceptionSquares.contains(boardArray[i][j].squareName))){
+   					wordInQuestion="";
+   				while(boardArray[i][j].tileInSquareValue !=' '){
+   					wordInQuestion = wordInQuestion + boardArray[i][j].tileInSquareValue;
+   					exceptionSquares = exceptionSquares + boardArray[i][j].squareName;
+   					j++;
+   				}
+   				System.out.println("WordinquestionHorizontal: " + wordInQuestion +"\nExceptionSquaresHorizontal: " + exceptionSquares);
+   				if(wordInQuestion.length() >= 1){
+						flag1 = (((scanner.useDelimiter("\\Z").next()).contains(wordInQuestion)) || ((acceptedWords.contains(wordInQuestion))));
+						System.out.println(flag1);
+						if(!flag1){
+							break;
+						}
+					}
+   			}
+   		}
+   	}
+      	scanner.close();
     	return (flag1 && flag2);
     }
 }

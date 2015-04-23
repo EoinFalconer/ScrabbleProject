@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.debug.ui.SCOPED_SAVE_SELECTION_DIALOG">
+<<<<<<< HEAD
 		<item value="289" key="DIALOG_WIDTH"/>
 		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
 		<item value="352" key="DIALOG_HEIGHT"/>
@@ -12,5 +13,10 @@
 		<item value="640" key="DIALOG_HEIGHT"/>
 		<item value="762" key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_2"/>
 		<item value="237" key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_1"/>
+=======
+		<item value="334" key="DIALOG_WIDTH"/>
+		<item value="496" key="DIALOG_HEIGHT"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+>>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392
 	</section>
 </section>

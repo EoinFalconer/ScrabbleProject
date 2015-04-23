@@ -26,6 +26,7 @@ public class Scrabble {
 			b.populateBoard();
 		
 				UI ui = new UI();
+				Challenge challenge = new Challenge();
 		
 						Pool newPool = new Pool();
 						newPool.populateNewPool();	
@@ -50,7 +51,6 @@ public class Scrabble {
 				String acceptedWords = "";
 				
 		
-					@SuppressWarnings("unused")
 					File theFile = new File("src/sowpods"); // dictionary File.
 		 
 // End Part One
@@ -102,14 +102,10 @@ public class Scrabble {
 // End Part Three
 		 
 // Part Four: Place On Board
-		 
 		else if(check.equals("placeonboard")) {
 			if(ui.InputValidationWhilePlacing(splitInput[0], splitInput[1], splitInput[2]) == true) {
 		
 							if(ui.controlGameFlow % 2 == 0){ 	// Player One
-								boolean noRefill = false;
-								Tile[] initialFrame = playerOneFrame.returnArrayOfTiles();
-								initialFrame = playerOneFrame.arrayOfTiles;
 									
 									if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
 										System.out.println("First Word Must be in centre.");
@@ -127,18 +123,18 @@ public class Scrabble {
 													splitInput[0].trim();
 													
 														if(splitInput[0].contains("$")){
-															playerOneFrame.removeFromFrame('$');
+															
 															splitInput[0] = ui.promptWhenSpacePlayed(splitInput[0]);
 														}
 													
 															 initialTurnScore = p.getScore();
 													
-																Square[] alreadyOnBoard = b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerOneFrame);
+																b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerOneFrame);
 																	p.addWordToScore(splitInput[0], playerOneFrame, splitInput[1],splitInput[2],b);
 															
 															endTurnScore = p.getScore();
 															
-																	//playerOneFrame.refillFrame(newPool);
+																	playerOneFrame.refillFrame(newPool);
 																		b.displayBoard();
 																			String isChallenging = ui.promptChallenge(p2);
 													
@@ -150,29 +146,25 @@ public class Scrabble {
 															boolean flag = b.checkAllWordsOnBoard(acceptedWords);
 															if(flag){
 																System.out.println("Word is ok, " + p2.playerid + " you have lost a turn");
+																if(splitInput[0].contains("$")){
+																	playerOneFrame.removeFromFrame('$');
+																	playerOneFrame.refillFrame(newPool);
+																}
 																acceptedWords = acceptedWords + splitInput[0];
 																	incrementWhenPlaceOnBoard++;
 															}
 															else if(!flag){
 																System.out.println("Word is not in scrabble dictionary, " + p.playerid + " you have lost a turn");
 																	p.playerScore = p.getScore() - scoreDifference;
-<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/9b/609c5e13e7e1001417c4cba4d04b75c1
-																		b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2], alreadyOnBoard);
-																		
-																		for(int i=0;i<playerOneFrame.arrayOfTiles.length;i++){
-																			newPool.insertAtRandom(playerTwoFrame.arrayOfTiles[i]);
-																		}
-																		for(int j=0;j<initialFrame.length;j++){
-																			System.out.println(initialFrame[j].tname);
-																		}
-																		noRefill = true;
-=======
 																		b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
->>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/Scrabble.java
 																			ui.controlGameFlow++;
 															}
 														}
 														else if(isChallenging.equalsIgnoreCase("no")){
+															if(splitInput[0].contains("$")){
+																playerOneFrame.removeFromFrame('$');
+																playerOneFrame.refillFrame(newPool);
+															}
 															ui.controlGameFlow++;
 															acceptedWords = acceptedWords + splitInput[0];
 																incrementWhenPlaceOnBoard++;
@@ -184,19 +176,8 @@ public class Scrabble {
 																	incrementWhenPlaceOnBoard++;
 														}
 												}
-									if(!noRefill){
-										playerOneFrame.refillFrame(newPool);
-									}
-									else{
-										
-											playerOneFrame.arrayOfTiles = initialFrame;
-											
-									}
 								}
 							else{
-								 Tile[] initialFrame = playerOneFrame.returnArrayOfTiles();
-								initialFrame = playerOneFrame.arrayOfTiles;
-								boolean noRefill = false;
 									if(!b.firstWordInCentre(splitInput[0], splitInput[1], splitInput[2]) && (incrementWhenPlaceOnBoard == 0)){
 										System.out.println("First Word Must be in centre.");
 									} 
@@ -210,24 +191,16 @@ public class Scrabble {
 												else{
 													splitInput[0].trim();
 														if(splitInput[0].contains("$")){
-															playerTwoFrame.removeFromFrame('$');
+															
 															splitInput[0] = ui.promptWhenSpacePlayed(splitInput[0]);
 														}
 														
-													initialTurnScore = p2.getScore();
-<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/9b/609c5e13e7e1001417c4cba4d04b75c1
-														Square[] alreadyOnBoard = b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerTwoFrame);
-															p2.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
-															
-													endTurnScore = p2.getScore();
-														//playerTwoFrame.refillFrame(newPool);
-=======
+													initialTurnScore = p.getScore();
 														b.insertOnBoard(splitInput[0], splitInput[1], splitInput[2], playerTwoFrame);
-															p2.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
+															p.addWordToScore(splitInput[0], playerTwoFrame, splitInput[1],splitInput[2],b);
 															
-													endTurnScore = p2.getScore();
+													endTurnScore = p.getScore();
 														playerTwoFrame.refillFrame(newPool);
->>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/Scrabble.java
 															b.displayBoard();
 																String isChallenging = ui.promptChallenge(p);
 																
@@ -236,28 +209,26 @@ public class Scrabble {
 																boolean flag = b.checkAllWordsOnBoard(acceptedWords);
 																if(flag){
 																	System.out.println("Word is ok, " + p.playerid + " you have lost a turn");
+																	if(splitInput[0].contains("$")){
+																		playerOneFrame.removeFromFrame('$');
+																		playerOneFrame.refillFrame(newPool);
+																	}
 																		acceptedWords = acceptedWords + splitInput[0];
 																		incrementWhenPlaceOnBoard++;
 																}
 																else{
 																	System.out.println("Word is not in scrabble dictionary, " + p2.playerid + " you have lost a turn");
-																		p2.playerScore = p2.getScore() - scoreDifference;
-<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/9b/609c5e13e7e1001417c4cba4d04b75c1
-																			b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2], alreadyOnBoard);
-																			for(int i=0;i<playerOneFrame.arrayOfTiles.length;i++){
-																				newPool.insertAtRandom(playerOneFrame.arrayOfTiles[i]);
-																			}
-																			for(int j=0;j<initialFrame.length;j++){
-																				System.out.println(initialFrame[j]);
-																			}
-																			noRefill = true;
-=======
+																		
+																		p.playerScore = p.getScore() - scoreDifference;
 																			b.removeWordFromBoard(splitInput[1], splitInput[0], splitInput[2]);
->>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/Scrabble.java
 																				ui.controlGameFlow++;
 																}
 													}
 													else if(isChallenging.equalsIgnoreCase("no")){
+														if(splitInput[0].contains("$")){
+															playerTwoFrame.removeFromFrame('$');
+															playerTwoFrame.refillFrame(newPool);
+														}
 														acceptedWords = acceptedWords + splitInput[0];
 														ui.controlGameFlow++;
 															incrementWhenPlaceOnBoard++;
@@ -269,13 +240,6 @@ public class Scrabble {
 																incrementWhenPlaceOnBoard++;
 													}
 												}
-									if(!noRefill){
-										playerTwoFrame.refillFrame(newPool);
-									}
-									else{
-											playerOneFrame.arrayOfTiles = initialFrame;
-											
-									}
 							}
 				}
 				else {

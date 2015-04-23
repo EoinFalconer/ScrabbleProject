@@ -118,7 +118,7 @@ public class Pool implements PoolInterface{
 					 * all 100 elements which are needed.
 					 */
 	
-						public void populateNewPool() throws RankOutOfBoundsException, VectorFullException{
+						public void populateNewPool() throws RankOutOfBoundsException, VectorFullException, FileNotFoundException{
 							
 							ReadInFromFile newpool = new ReadInFromFile(); //this makes a readinfromfile object
 								newpool.copyFile("src/abc.txt","src/123.txt");

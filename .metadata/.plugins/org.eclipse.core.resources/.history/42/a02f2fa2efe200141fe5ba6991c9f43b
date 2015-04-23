@@ -24,8 +24,13 @@ public class ReadInFromFile {
 	
     public void copyFile(String sourceFileName, String sourceNumFile)  throws FileNotFoundException
     	{
+<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/42/a02f2fa2efe200141fe5ba6991c9f43b
 						String Path1 = new File("abc.txt").getAbsolutePath();
 						File lettersURL = new File(Path);
+=======
+					
+						File lettersURL = new File("src/abc.txt");
+>>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/ReadInFromFile.java
 						File numbersURL = new File("src/123.txt");
 					
 						InputStream is = new FileInputStream(lettersURL);

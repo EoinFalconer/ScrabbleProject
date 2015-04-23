@@ -17,6 +17,10 @@ public interface PoolInterface {
     public Tile frameToPool(int rank, Tile element) throws RankOutOfBoundsException;
     public void insertAtRandom(Tile element) throws RankOutOfBoundsException, VectorFullException;
 	public Tile removeTileAtRankFromPool(int rank) throws RankOutOfBoundsException;
+<<<<<<< HEAD:.metadata/.plugins/org.eclipse.core.resources/.history/28/80193457f3e20014176efa662a74cae9
 	public void populateNewPool() throws RankOutOfBoundsException, VectorFullException, x;
+=======
+	public void populateNewPool() throws RankOutOfBoundsException, VectorFullException, FileNotFoundException;
+>>>>>>> c9e2f5103a8d84e75cd9fdfd2c74d6356bc99392:Scrabble2/src/PoolInterface.java
 		
 }
