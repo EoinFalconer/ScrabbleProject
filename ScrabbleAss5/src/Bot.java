@@ -8,6 +8,14 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Comparator;
 
+/*
+ * B's Whyte Falcon
+ * 
+ * Ben Reynolds - 13309656
+ * Eoin Falconer - 13331016
+ * Conor Whyte - 13324911
+ * 
+ */
 
 public class Bot  {
 
@@ -22,7 +30,7 @@ public class Bot  {
 	String[] exceptions = new String[200];
 	int numberOfExceptions = 0;
 	int controlVertHor = 0;
-	char[] notWantedChar = {'V','X','J','W','Z','Q','K','G','B','P','M','C','U','L','D','R','H','S','O','N','I','A','E','F','T','Y'};
+	char[] notWantedChar = {'V','X','Z','W','J','Q','K','G','B','P','M','C','U','L','D','R','H','S','O','N','I','A','E','F','T','Y'};
 	int numberOfLettersOnBoard = 0;
 				
 	Bot () {
@@ -51,12 +59,9 @@ public class Bot  {
 				if(notWantedChar[j] == player.getFrame().getTile(k).getFace()){
 					//System.out.println("Does " + notWantedChar[j] + " match " + player.getFrame().getTile(k).getFace());
 					numberOfLettersCount++;
-					//System.out.println(numberOfLettersCount);
 					letters = letters + player.getFrame().getTile(k).getFace();
 					//System.out.println("FOUND LETTER");
 					if(numberOfLettersCount == 2){
-						//System.out.println("Search should end");
-						//System.out.println("LETTERS" +letters);
 						endSearch = true;
 						break;
 					}
@@ -109,20 +114,21 @@ public class Bot  {
 		//System.out.println(frameString);
 		
 		if(!board.isFirstPlay()){
-		///	System.out.println("This is not the first play");
 			for(int i=0;i<15;i++){
 				for(int j=0;j<15;j++){
 					if(board.getSqContents(i, j)!=' '){
 						 Tile tempSq = new Tile(board.getSqContents(i, j)); 
-						if(bestSqScore < tempSq.getValue()){
+						 if(bestSqScore < tempSq.getValue()){
 							String tempString = Character.toString(tempSq.getFace()) + Integer.toString(i) + Integer.toString(j);
-								boolean ifInExceptions = false;
+							boolean ifInExceptions = false;
+								
 								for(int l=0;l<numberOfExceptions-1;l++){
 									if(tempString.equalsIgnoreCase(exceptions[l])){
 										ifInExceptions = true;
 										break;
 									}
 								}
+								
 								if(!ifInExceptions){
 									bestSq = tempSq.getFace();
 									bestSqScore = tempSq.getValue();

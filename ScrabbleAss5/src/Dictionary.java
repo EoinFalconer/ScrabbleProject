@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Dictionary {
 	
-	private String inputFileName = "sowpods";
+	private String inputFileName = "src/sowpods";
 	private Node root;
 
 	Dictionary () throws FileNotFoundException {
